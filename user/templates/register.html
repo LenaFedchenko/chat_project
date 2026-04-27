@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+
+
+{% block links %}
+<link rel="stylesheet" href="url_for('static', file_name= 'css/register.css')">
+{% endblock  %}
+
+{% block content %}
+    <form action="" method= "post">
+        <label for="">
+            Введіть вашу електронну пошту нижче, щоб створити обліковий запис
+            <input type="email" placeholder="name@example.com" name="email" minlength = "8" >
+        
+        <label for="">
+            Задайте ваш пароль нижче,щоб створити обліковий запис
+            <input type="password" placeholder="**********************" name="password" minlength = "8">
+        </label>
+        <button type="submit">Надіслати код підтвердження</button>
+    </form>
+{% endblock  %}
