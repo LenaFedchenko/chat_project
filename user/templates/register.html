@@ -3,19 +3,39 @@
 
 
 {% block links %}
-<link rel="stylesheet" href="url_for('static', file_name= 'css/register.css')">
+<link rel="stylesheet" href="{{url_for('user.static', filename= 'css/register.css')}}">
 {% endblock  %}
 
 {% block content %}
-    <form action="" method= "post">
-        <label for="">
-            Введіть вашу електронну пошту нижче, щоб створити обліковий запис
-            <input type="email" placeholder="name@example.com" name="email" minlength = "8" >
-        
-        <label for="">
-            Задайте ваш пароль нижче,щоб створити обліковий запис
-            <input type="password" placeholder="**********************" name="password" minlength = "8">
-        </label>
-        <button type="submit">Надіслати код підтвердження</button>
-    </form>
+    <div class="big-div">
+        <div class="mini-div">
+            <img src="{{url_for('user.static', filename = 'images/logo.png')}}" alt="logo_img" class="logo">
+            <div class="div-create">
+                <p class="create">Створити обліковий запис</p>
+            </div>
+                <form method= "post" class="veri_big_div">
+                    <label class="label-register">
+                        Введіть вашу електронну пошту нижче, щоб створити обліковий запис
+                        <input type="email" placeholder="name@example.com" name="email" minlength = "8" >
+                    </label>
+                    <label class="label-register">
+                        Задайте ваш пароль нижче,щоб створити обліковий запис
+                        <input type="password" placeholder="**********************" name="password" minlength = "8">
+                    </label>
+                    <button type="submit" class="btn-send">Надіслати код підтвердження</button>
+                </form>
+
+
+            <div class="info">
+                <p>Натискаючи «Продовжити», ви погоджуєтеся з нашими</p>
+                <div class="div-links">
+                    <a href="" class="links">Умовами обслуговування</a>
+                    <p>та</p>
+                    <a href="" class="links">Політикою конфіденційності.</a>
+                </div>
+            </div>
+    
+        </div>
+        <img src="{{url_for('user.static', filename= 'images/img_friends.png')}}" alt="friends">
+    </div class="general-div">
 {% endblock  %}
