@@ -1,0 +1,25 @@
+.header{
+    display: flex;
+    height: 6.5vh;
+    gap: 0.66vw;
+}
+
+.logo{
+    display: flex;
+    gap: 0.39vw;
+    width: 85.5vw;
+    align-items: center;
+}
+.logo img{
+    width: 20px;
+    height: 20px;
+}
+.logo p{
+    font-size: 20px;
+    font-weight: 600;
+    color: #1A1A1A;
+}
+.header img{
+    height: 40px;
+    width: 40px;
+}

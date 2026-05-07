@@ -9,7 +9,7 @@ from chat.views import render_chat
 # Камилла создать ссылку на страничку чатов и добавить все импорты
 
 chat.add_url_rule(
-    rule= "/chat/",
+    rule= "/",
     view_func= render_chat,
     methods = ['GET', 'POST']
 )

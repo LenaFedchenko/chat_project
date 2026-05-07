@@ -3,70 +3,75 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    gap: 32px;
+    gap: 2rem;
 }
 
 .big-div{
     display: flex;
-    gap: 40px;
-    width: 500px;
-    height: 775px;
+    gap: 2.5rem;
+    width: 31.25rem;
+    height: 48.4375rem;
 }
+
 .big-div{
     display: flex;
-    gap: 32px;
+    gap: 2rem;
     flex-direction: column;
-    width: 500px;
-    height: 416px;
+    width: 31.25rem;
+    height: 26rem;
 }
+
 .create{
     font-weight: 600;
     color: #070A1C;
-    font-size: 24px;
+    font-size: 1.5rem;
 }
 
 .div-create{
     display: flex;
-    width: 500px ;
+    width: 31.25rem;
     align-items: center;
     justify-content: center;
 }
 
 .veri_big_div{
     display: flex;
-    width: 500px;
-    gap: 24px;
+    width: 31.25rem;
+    gap: 1.5rem;
     flex-direction: column;
 }
 
 .label-register{
     display: flex;
-    width: 500px;
+    width: 31.25rem;
     flex-direction: column;
-    gap: 16px;
+    gap: 1rem;
     color: #71717A;
-    font-weight: 400px;
-    font-size: 14px;
-    line-height: 20px;
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
 }
+
 .label-register input{
-    width: 500px;
-    height: 36px;
-    border-radius: 5px;
-    border: 1px #E2E1EC solid;
+    width: 31.25rem;
+    height: 2.25rem;
+    border-radius: 0.3125rem;
+    border: 0.0625rem #E2E1EC solid;
     color: #B3B3C5;
 }
+
 .btn-send{
-    width: 500px;
-    height: 36px;
-    gap: 8px;
+    width: 31.25rem;
+    height: 2.25rem;
+    gap: 0.5rem;
     background-color: #070A1C;
     color: #FAF8FF;
-    border-radius: 5px;
-    font-size: 14px;
+    border-radius: 0.3125rem;
+    font-size: 0.875rem;
     font-weight: 500;
     cursor: pointer;
 }
+
 .info{
     display: flex;
     align-items: center;
@@ -74,37 +79,48 @@
     flex-direction: column;
     color: #B3B3C5;
 }
+
 .info p{
-    margin: 4px;
+    margin: 0.25rem;
 }
+
 .div-links{
     display: flex;
     align-items: center;
     justify-content: center;
     color:#B3B3C5;
-    gap: 4px;
+    gap: 0.25rem;
 }
+
 .links{
     color: #B3B3C5;
 }
+
 .sml-div{
     display: flex;
-    height: 40px;
+    height: 2.5rem;
     align-items: center;
     justify-content: right;
 }
+
 .enter{
-    padding: 10px;
-    height: 36px;
+    padding: 0.625rem;
+    height: 2.25rem;
     background-color: transparent;
-    border-radius: 5px;
-    border: 1px #E4E4E7 solid;
+    border-radius: 0.3125rem;
+    border: 0.0625rem #E4E4E7 solid;
 }
+
 .all-content{
     display: flex;
     flex-direction: column;
 }
+
 .txt-button{
     text-decoration: none;
     color: #0D133F;
+}
+.logo{
+    width: 218px;
+    height: 28px;
 }

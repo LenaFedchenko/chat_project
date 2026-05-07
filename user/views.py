@@ -19,7 +19,7 @@ def render_register():
                 )
                 DATABASE.session.add(user)
                 DATABASE.session.commit()
-                return flask.redirect('/chat')
+                return flask.redirect('/')
 
     return flask.render_template("register.html")
 
@@ -35,6 +35,6 @@ def render_login():
 
         if is_hash_password == True:
             flask_login.login_user(user)
-            return flask.redirect('/chat')
+            return flask.redirect('/')
 
     return flask.render_template("login.html")
