@@ -3,6 +3,7 @@ import werkzeug.security as security
 from .model import User
 from project.db import DATABASE
 import flask_login
+from .send_email import send_email
 
 
 def render_register():
@@ -12,6 +13,7 @@ def render_register():
         if email and password:
             email_user = User.query.filter_by(email=email).first()
             if email_user == None:
+                send_email()
                 hashed_password = security.generate_password_hash(password)
                 user = User(
                     email = email,
