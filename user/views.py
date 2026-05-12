@@ -13,7 +13,7 @@ def render_register():
         if email and password:
             email_user = User.query.filter_by(email=email).first()
             if email_user == None:
-                send_email()
+                send_email(email_user)
                 hashed_password = security.generate_password_hash(password)
                 user = User(
                     email = email,
