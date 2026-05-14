@@ -1,0 +1,59 @@
+
+.right-part{
+    display: flex;
+    width: 26.5vw;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    border: 1px #E2E1EC solid;
+}
+
+.users{
+    display: flex;
+    width: 26.5vw;
+    height: 6.4vh;
+    padding: 1.5vw 2.4vh 1.5vw 2.4vh;
+    flex-direction: column;
+}
+
+.status{
+    display: flex;
+    gap: 0.8vw;
+    width: 23.4vw;
+    flex-direction: row;
+}
+
+.status-users{
+    display: flex;
+    gap: 0.3vw;
+    align-items: center;
+    justify-content: center;
+    color: #999999;
+}
+
+.people-online{
+    display: flex;
+    width: 26.5vw;
+    height: auto;
+    padding: 8px;
+    flex-direction: column;
+}
+
+.person{
+    display: flex;
+    width: 26.5vw;
+    height: 4.8vh;
+    padding: 0.8vh 0.9vw 0.8vh 0.9vw;
+    gap: 1vw;
+    flex-direction: row;
+    align-items: center;
+}
+.account-settings{
+    display: flex;
+    width: 26.5vw;
+    height: 30vh;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid #007AFF26;
+}

@@ -7,6 +7,7 @@ from .send_email import send_email
 
 
 def render_register():
+    message = ""
     if flask.request.method == "POST":
         email = flask.request.form["email"]
         password = flask.request.form["password"]
@@ -14,7 +15,6 @@ def render_register():
             email_user = User.query.filter_by(email=email).first()
             if email_user == None:
                 print(email)
-                send_email(email)
                 hashed_password = security.generate_password_hash(password)
                 user = User(
                     email = email,
@@ -22,9 +22,11 @@ def render_register():
                 )
                 DATABASE.session.add(user)
                 DATABASE.session.commit()
-                return flask.redirect('/')
+                send_email(email= email, user_id=user.id)
+                message = "Перейдіть на пошту та підтвердіть її"
+                # return flask.redirect('/')
 
-    return flask.render_template("register.html")
+    return flask.render_template("register.html", message = message)
 
 
 def render_login():
@@ -41,3 +43,11 @@ def render_login():
             return flask.redirect('/')
 
     return flask.render_template("login.html")
+
+def check_email():
+    user_id = flask.request.args.get('user_id')
+    user = User.query.filter_by(id = user_id).scalar()
+    if user != None:
+        user.is_verified = True
+        flask_login.login_user(user)
+        return flask.redirect('/')

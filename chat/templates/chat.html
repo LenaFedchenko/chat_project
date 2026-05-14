@@ -2,42 +2,102 @@
 
 
 {% block links %}
+<link rel="stylesheet" href="{{url_for('chat.static', filename='css/left.css') }}">
 <link rel="stylesheet" href="{{url_for('chat.static', filename='css/chat.css') }}">
+<link rel="stylesheet" href="{{url_for('chat.static', filename='css/right.css') }}">
 {% endblock  %}
 
 {% block content %}
-<div>
+<div class="all-page-chat">
     <div class="left-part">
         <div class="search-chat">
-            <input type="text" placeholder="Пошук чатів...">
+            <input type="text" placeholder="Пошук чатів..." style="border: none; width:22vw">
         </div>
-        <div class="your-chat">
-            <div class="header-your-chat">
-                <h3>Ваш чат</h3>
-                <img src="{{url_for('chat.static', filename = 'images/bin.png')}}" alt="">
-            </div>
-            <div class="example-chat">
-                <img src="{{url_for('chat.static', filename = 'images/avatar.png')}}" alt="">
-                <div class="all-exam">
-                    <div class="name-hact">
-                        <h3 class="name">Dream Team</h3>
-                        <p>15m ago</p>
-                    </div>
-                    <div>
-                        <p>I just shared the new mockups in Figma</p> 
+        <div class="all-chats">
+            <div class="your-chat">
+                <div class="header-your-chat">
+                    <h3>Ваш чат</h3>
+                    <img src="{{url_for('chat.static', filename = 'images/bin.png')}}" alt="">
+                </div>
+                <div class="example-chat">
+                    <img src="{{url_for('chat.static', filename = 'images/avatar.png')}}" alt="">
+                    <div class="all-exam">
+                        <div class="name-hact">
+                            <h3 class="name">Dream Team</h3>
+                            <p>15m ago</p>
+                        </div>
+                        <div>
+                            <p>I just shared the new mockups in Figma</p> 
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div>
-
+            <hr style="width: 26.5vw;">
+            <div class="chats">
+                {% for i in range(5) %}
+                    <div class="example-chat">
+                        <img src="{{url_for('chat.static', filename = 'images/avatar.png')}}" alt="">
+                        <div class="all-exam">
+                            <div class="name-hact">
+                                <h3 class="name">Dream Team</h3>
+                                <p>15m ago</p>
+                            </div>
+                            <div>
+                                <p>I just shared the new mockups in Figma</p> 
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                
+            </div>
         </div>
     </div>
-    <div>
-
-    </div>
-    <div>
+    <div class="chat-place">
+        <div class="settings-chat">
+            <h3>General Chat</h3>
+            <div>
+                <img src="{{url_for('chat.static', filename = 'images/search.png')}}" alt="">
+                <img src="{{url_for('chat.static', filename = 'images/more.png')}}" alt="">
+            </div>
+        </div>
+        <div class="chat">
+            тут будет чат
+        </div>
+        <div style="width: 46.5vw; height: 2.1vh;"></div>
+        <div style="display: flex;">
+            <div class="place-for-message">
+                <img src="{{url_for('chat.static', filename = 'images/emoji.png')}}" alt="">
+                <input class="typing-field" type="text" placeholder="Введіть повідомлення...">
+                <img src="{{url_for('chat.static', filename = 'images/send.png')}}" alt="">
+            </div>
+        </div>
         
+    </div>
+    <div class="right-part">
+        <div class="users">
+            <p style="font-size: 1.25rem; margin:0px; font-weight:400">Користувачі</p>
+            <div class="status">
+                <div class="status-users">
+                    <img style="width: 12px; height:12px;" src="{{url_for('chat.static', filename = 'images/people.png')}}" alt="">
+                    <p style="font-size: 0.75rem">24 пользователя</p>
+                </div>
+                <div class="status-users">
+                    <img style="width: 12px; height:12px;" src="{{url_for('chat.static', filename = 'images/people.png')}}" alt="">
+                    <p style="font-size: 0.75rem">8 online</p>
+                </div>
+            </div>
+        </div>
+        <div class="people-online">
+            {% for i in range(8) %}
+                <div class="person">
+                    <img src="{{url_for('chat.static', filename = 'images/avatar.png')}}" alt="">
+                    <p>Іван Петренко</p>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="account-settings">
+            Тут будуть настройки акаунта
+        </div>
     </div>
 </div>
 

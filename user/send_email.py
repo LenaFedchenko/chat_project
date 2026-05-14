@@ -2,10 +2,11 @@ import smtplib
 import email.message as msg
 import email.mime.image as mime_image
 import os
+import flask
 from dotenv import load_dotenv
 
 load_dotenv()
-def send_email(email):
+def send_email(email, user_id):
     email_sender = os.getenv("EMAIL_SENDER")
     password_sender = os.getenv("PASSWORD_KEY")
     print(email_sender,password_sender)
@@ -14,9 +15,9 @@ def send_email(email):
         smtp.starttls()
         smtp.login(user= email_sender, password= password_sender)
         email_msg = msg.EmailMessage()
-        
-        
-        html = """
+        # http://1200:700:8000:/check_email?user_id=5
+        link = flask.url_for("user.check_email", user_id= user_id, _external = True)
+        html = f"""
             <!DOCTYPE html>
             <html lang="uk">
             <head>
@@ -39,7 +40,7 @@ def send_email(email):
                             власником цієї електронної адреси, будь ласка, підтвердіть свою пошту.
                         </p>
 
-                        <a href="https://example.com" style="display: block; width: 100%; padding: 12px 20px; box-sizing: border-box; background-color: #070A1C; color: #FFFFFF; text-align: center; text-decoration: none; border-radius: 6px; font-size: 15px; margin-bottom: 24px;">
+                        <a href="{link}" style="display: block; width: 100%; padding: 12px 20px; box-sizing: border-box; background-color: #070A1C; color: #FFFFFF; text-align: center; text-decoration: none; border-radius: 6px; font-size: 15px; margin-bottom: 24px;">
                             Підтвердити пошту
                         </a>
 
