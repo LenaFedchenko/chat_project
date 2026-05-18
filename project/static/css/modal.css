@@ -1,0 +1,165 @@
+.modal{
+    display: flex;
+    flex-direction: column;
+    border-radius: 0.4rem;
+    width: 31vw;
+    height: 74.8vh;
+    gap: 1.6vh;
+    padding: 1.6vh;
+    border: 0.06rem #E2E1EC solid;
+    background-color: white;
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+}
+.modal-bg{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.45);
+    z-index: 999;
+}
+button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.settings{
+    display: flex;
+    width: 28.9vw;
+    height: 2.2vh;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+}
+
+.img-set{
+    width: 1rem;
+    height: 1rem;
+    cursor: pointer;
+}
+
+.data-user{
+    display: flex;
+    width: 28.8vw;
+    height: 38vh;
+    gap: 1.6vh;
+    flex-direction: column;
+}
+
+.img-prof{
+    width: 28.9vw;
+    height: 10vh;
+    gap: 0.4rem;
+}
+
+.editing{
+    display: flex;
+    width: 22.4vw;
+    height: 6.4vh;
+    gap: 1.5rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.ava{
+    width: 4rem;
+    height: 4rem;
+}
+
+.label-inp{
+    display: flex;
+    width: 28.9vw;
+    height: 6.2vh;
+    gap: 0.5rem;
+    flex-direction: column;
+}
+
+.inp{
+    width: 28.9vw;
+    height: 4vh;
+    border-radius: 0.25rem;
+    border: 0.06rem #E4E4E7 solid;
+}
+
+.btn-sel{
+    width: 9.8vw;
+    height: 2vh;
+    background-color: transparent;
+    border: none;
+}
+
+.btns{
+    display: flex;
+    width: 28.9vw;
+    height: 4vh;
+    align-items: center;
+    justify-content: right;
+    gap: 1rem;
+}
+
+.btn-1{
+    width: 7vw;
+    height: 4vh;
+    color: #007AFF;
+    background-color: transparent;
+    border: 0.06rem #007AFF solid;
+    border-radius: 0.4rem;
+}
+
+.btn-2{
+    width: 7vw;
+    height: 4vh;
+    color: #FAFAFA;
+    background-color: #007AFF;
+    border-radius: 0.4rem;
+    border: none;
+}
+
+.btn-change{
+    width: 7.9vw;
+    height: 4vh;
+    color: #007AFF;
+    background-color: transparent;
+    border: 0.06rem #007AFF solid;
+    border-radius: 0.4rem;
+}
+
+.btn-del{
+    width: 7.9vw;
+    height: 4vh;
+    color: #0D133F;
+    background-color: transparent;
+    border: 0.06rem #0D133F solid;
+    border-radius: 0.4rem;
+}
+
+button{
+    transition: 0.3s;
+}
+
+.btn-1:hover,
+.btn-change:hover{
+    background-color: #007AFF;
+    color: white;
+}
+
+.btn-2:hover{
+    background-color: #0062cc;
+}
+
+.btn-del:hover{
+    background-color: #0D133F;
+    color: white;
+}
+
+.btn-sel:hover{
+    color: #007AFF;
+}

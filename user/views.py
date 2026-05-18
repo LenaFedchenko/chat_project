@@ -47,7 +47,9 @@ def render_login():
 def check_email():
     user_id = flask.request.args.get('user_id')
     user = User.query.filter_by(id = user_id).scalar()
+    print(user)
     if user != None:
         user.is_verified = True
+        DATABASE.session.commit()
         flask_login.login_user(user)
         return flask.redirect('/')

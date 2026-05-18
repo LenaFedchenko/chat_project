@@ -1,27 +1,86 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="{{url_for('static', filename= 'css/base.css')}}">
-    <link rel="stylesheet" href="{{url_for('static', filename= 'css/header.css')}}">
-    {% block links %}{% endblock  %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/modal.css') }}">
+    {% block links %}{% endblock %}
 </head>
-<body>
+<body class="body">
     {% if login %}
         <div class="header">
             <div class="logo">
-                <img src="{{url_for('chat.static', filename= 'images/logo.svg')}}" alt="">
+                <img src="{{ url_for('chat.static', filename='images/logo.svg') }}" alt="">
                 <p>Chat</p>
             </div>
-            <img src="{{url_for('chat.static', filename= 'images/notif.svg')}}" alt="">
-            <img src="{{url_for('chat.static', filename= 'images/settings.svg')}}" alt="">
-            <img src="{{url_for('chat.static', filename= 'images/avatar.png')}}" alt="">
+            <img src="{{ url_for('chat.static', filename='images/notif.svg') }}" alt="">
+            <img src="{{ url_for('chat.static', filename='images/settings.svg') }}" alt="" class="open-modal" style="cursor: pointer;">
+            <img src="{{ url_for('chat.static', filename='images/avatar.png') }}" alt="">
         </div>
     {% endif %}
-    {% block content %}
-        
-    {% endblock  %}
+    <div class="modal-bg"></div>
+    <div style="display: none;" class="modal">
+        <div class="settings">
+            <p>Налаштування</p>
+            <img src="{{ url_for('static', filename='images/close.png') }}" alt="" class="img-set">
+        </div>
+        <hr style="width: 28.9vw; color: #007AFF26">
+        <div class="img-prof">
+            <p>Зображення профілю</p>
+            <div class="editing">
+                <img src="{{ url_for('chat.static', filename='images/avatar.png') }}" alt="" class="ava">
+                <button type="button" class="btn-change">
+                    <img src="{{ url_for('static', filename='images/repeat.png') }}" alt="">
+                    Замінити
+                </button>
+                <button type="button" class="btn-del">
+                    <img src="{{ url_for('static', filename='images/trash.png') }}" alt="" style="width: 16px; height: 16px;">
+                    Видалити
+                </button>
+            </div>
+        </div>
+        <hr style="width: 28.9vw; color: #007AFF26">
+        <form action="" method="post" class="data-user">
+            <label class="label-inp">
+                Ім’я
+                <input type="text" name="first_name" minlength="2" class="inp">
+            </label>
+            <label class="label-inp">
+                Прізвище
+                <input type="text" name="last_name" minlength="3" class="inp">
+            </label>
+            <label class="label-inp">
+                Ім’я користувача
+                <input type="text" name="username" minlength="2" class="inp">
+            </label>
+            <label class="label-inp">
+                Стать
+                <select name="gender" class="inp">
+                    <option value="female">Жіноча</option>
+                    <option value="male">Чоловіча</option>
+                </select>
+            </label>
+            <label class="label-inp">
+                Вік
+                <input type="date" name="birth_date" class="inp">
+            </label>
+            <hr style="width: 28.9vw; color: #007AFF26">
+            <button type="button" class="btn-sel">
+                <img src="{{ url_for('static', filename='images/trash.png') }}" alt="" style="width: 16px; height: 16px;">
+                Видалити аккаунт
+            </button>
+            <hr style="width: 28.9vw; color: #007AFF26">
+            <div class="btns">
+                <button type="button" class="btn-1">Скасувати</button>
+                <button type="submit" class="btn-2">Зберегти</button>
+            </div>
+        </form>
+    </div>
+    {% block content %}{% endblock %}
+    <script src="{{ url_for('static', filename='js/modal.js') }}"></script>
 </body>
 </html>
