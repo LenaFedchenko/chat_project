@@ -44,7 +44,7 @@
             </div>
         </div>
         <hr style="width: 28.9vw; color: #007AFF26">
-        <form action="" method="post" class="data-user">
+        <form action="/get-data" method="post" class="data-user">
             <label class="label-inp">
                 Ім’я
                 <input type="text" name="first_name" minlength="2" class="inp">
@@ -60,8 +60,8 @@
             <label class="label-inp">
                 Стать
                 <select name="gender" class="inp">
-                    <option value="female">Жіноча</option>
-                    <option value="male">Чоловіча</option>
+                    <option value="female" name= "gender">Жіноча</option>
+                    <option value="male" name= "gender">Чоловіча</option>
                 </select>
             </label>
             <label class="label-inp">
@@ -69,10 +69,10 @@
                 <input type="date" name="birth_date" class="inp">
             </label>
             <hr style="width: 28.9vw; color: #007AFF26">
-            <button type="button" class="btn-sel">
+            <a href="" class="btn-sel">
                 <img src="{{ url_for('static', filename='images/trash.png') }}" alt="" style="width: 16px; height: 16px;">
                 Видалити аккаунт
-            </button>
+            </a>
             <hr style="width: 28.9vw; color: #007AFF26">
             <div class="btns">
                 <button type="button" class="btn-1">Скасувати</button>

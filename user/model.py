@@ -6,3 +6,15 @@ class User(DATABASE.Model, flask_login.UserMixin):
     email = DATABASE.Column(DATABASE.String, nullable= False, unique= True)
     password = DATABASE.Column(DATABASE.String, nullable= False)
     is_verified = DATABASE.Column(DATABASE.Boolean, nullable = False, default = False)
+
+    first_name = DATABASE.Column(DATABASE.String, nullable= False, default= "Null")
+    last_name = DATABASE.Column(DATABASE.String, nullable= False, default= "Null")
+    username = DATABASE.Column(DATABASE.String, nullable= False, default= "Null" , unique= True)
+    gender = DATABASE.Column(DATABASE.String, nullable= False, default= "Null")
+    age = DATABASE.Column(DATABASE.String, nullable= False, default= "Null")
+    
+    
+
+    
+    
+    
