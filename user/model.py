@@ -14,7 +14,9 @@ class User(DATABASE.Model, flask_login.UserMixin):
     age = DATABASE.Column(DATABASE.String, nullable= False, default= "Null")
     
     
-
-    
-    
+    chats = DATABASE.relationship(
+        "Chat",
+        secondary = "user_chat",
+        back_populates = "users"
+    )
     

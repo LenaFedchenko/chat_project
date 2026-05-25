@@ -3,8 +3,13 @@ from user.app import user
 from chat.app import chat
 
 from user.views import render_login, del_account, render_register, check_email
-from chat.views import render_chat, get_data
+from chat.views import render_chat, get_data, create_chat_page
 
+chat.add_url_rule(
+    rule = '/create-chat/',
+    view_func = create_chat_page,
+    methods = ['GET', 'POST']
+)
 
 chat.add_url_rule(
     rule= "/",

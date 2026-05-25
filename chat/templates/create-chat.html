@@ -1,0 +1,36 @@
+<div class="back">
+
+    <div class="modal-chat">
+        <div class="modal-header">
+            <p>Створити чат</p>
+            <img 
+            src="{{ url_for('static', filename='images/close.png') }}" 
+            alt="" 
+            class="close"
+            >
+        </div>
+        
+        <form method="POST" action="/create-chat" class="modal-form">
+            <label class="chat-label">
+                Назва чату
+                
+                <input
+                type="text"
+                name="chat_name"
+                placeholder="Введіть назву чату"
+                class="inp"
+                >
+            </label>
+            
+            <div class="btns">
+                <button type="button" class="btn cancel">
+                    Скасувати
+                </button>
+                
+                <button type="submit" class="btn submit-chat">
+                    Створити
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

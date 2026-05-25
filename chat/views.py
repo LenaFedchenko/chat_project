@@ -2,11 +2,16 @@ import flask
 import flask_login
 from user.model import User
 from project.db import DATABASE
+from .model import Chat
 
 def render_chat():
     if flask_login.current_user.is_authenticated:
         login = True
-        return flask.render_template("chat.html",login=login)
+        user = flask_login.current_user
+        created_chat = Chat.query.filter_by(
+            creator_id=user.id
+        ).first()
+        return flask.render_template("chat.html", login=login, created_chat=created_chat)
     else:
         return flask.redirect("/register")
 
@@ -30,3 +35,31 @@ def get_data():
 
             DATABASE.session.commit()
             return flask.redirect("/")
+
+
+def create_chat_page():
+    if flask.request.method == "POST":
+        chat_name = flask.request.form["chat_name"]
+
+        user = flask_login.current_user
+        is_create = Chat.query.filter_by(
+                creator_id=user.id
+            ).first()
+
+        if is_create is None:
+            if chat_name:
+                new_chat = Chat(
+                    name_chat = chat_name,
+                    img_chat = "avatar.png",
+                    last_msg = "Чат пустий",
+                    creator_id=user.id,
+                    users = [user]
+                    )
+                
+                DATABASE.session.add(new_chat)
+                DATABASE.session.commit()
+                return flask.redirect("/")
+        else:
+            return flask.redirect("/")
+    return flask.make_response({"status":"success"})
+
