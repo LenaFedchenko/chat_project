@@ -14,7 +14,6 @@ def render_register():
         if email and password:
             email_user = User.query.filter_by(email=email).first()
             if email_user == None:
-                print(email)
                 hashed_password = security.generate_password_hash(password)
                 user = User(
                     email = email,
@@ -35,7 +34,6 @@ def render_login():
     
     if email and password:
         user = User.query.filter_by(email = email).scalar()
-        print(user)
         is_hash_password = security.check_password_hash(user.password, password)
 
         if is_hash_password == True:
@@ -47,9 +45,17 @@ def render_login():
 def check_email():
     user_id = flask.request.args.get('user_id')
     user = User.query.filter_by(id = user_id).scalar()
-    print(user)
+    
     if user != None:
         user.is_verified = True
         DATABASE.session.commit()
         flask_login.login_user(user)
         return flask.redirect('/')
+    
+def del_account():
+    user_id = flask_login.current_user.id
+    user = User.query.filter_by(id = user_id).scalar()
+    print(user)
+    DATABASE.session.delete(user)
+    DATABASE.session.commit()
+    return flask.redirect("/register")
