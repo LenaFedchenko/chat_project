@@ -43,14 +43,6 @@
     font-weight: 600;
     color: #1A1A1A;
 }
-.example-chat{
-    display: flex;
-    align-items: center;
-    width: 24.2vw;
-    height: 4.2vh;
-    padding: 1vh 1vw 1vh 1vw;
-    gap: 1.2vh;
-}
 .name-hact{
     display: flex;
     width: 17.8vw;
