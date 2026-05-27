@@ -9,6 +9,9 @@
 }
 
 .search-chat{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: 8.2vh;
     gap: 1.19vh;
     padding: 1.6vh;
