@@ -2,7 +2,7 @@ from .settings import main_app
 from user.app import user
 from chat.app import chat
 
-from user.views import render_login, del_account, render_register, check_email
+from user.views import *
 from chat.views import *
 
 chat.add_url_rule(
@@ -11,7 +11,7 @@ chat.add_url_rule(
     methods = ['GET', 'POST']
 )
 chat.add_url_rule(
-    rule= "/del-chat",
+    rule= "/del-chat/",
     view_func= del_chat,
     methods = ['GET', 'POST']
 )

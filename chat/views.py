@@ -76,20 +76,15 @@ def create_chat_page():
 def del_chat():
     if flask.request.method == "POST":
         data = flask.request.get_json()
-
-        search = data.get("del")
-
+        search = data.get('del')
         if search:
             user = flask_login.current_user
-            is_create = Chat.query.filter_by(
-                creator_id=user.id
-            ).first()
-            is_create.users.clear()
-            DATABASE.session.delete(is_create)
+            chat_delete = Chat.query.filter_by(creator_id = user.id).first()
+            chat_delete.users.clear()
+            DATABASE.session.delete(chat_delete)
             DATABASE.session.commit()
-
+            
         return {
             "status": "success",
             "search": search
         }
-    

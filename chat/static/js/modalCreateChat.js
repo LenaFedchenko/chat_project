@@ -53,25 +53,25 @@ document.addEventListener("DOMContentLoaded", () => {
             back2.style.display = "none"
         })
     }
-    if (delChat){
+    if (delChat) {
         delChat.addEventListener("click", () => {
-            fetch("/del-chat", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    del: true
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data)
-
-                if (data.status === "success") {
-                    window.location.reload()
-                }
-            })
+            deleteChat()
         })
     }
 })
+
+async function deleteChat(){
+    const response = await fetch("/del-chat", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            del: true
+        })
+    })
+    const data = await response.json()
+    if (data.status === "success") {
+        window.location.reload()
+    }
+}
