@@ -14,13 +14,18 @@ def render_chat():
         all_chats = Chat.query.filter(
             Chat.users.any(User.id == user.id)
         ).all()
+        try: 
+            my_chats = user.chats
+        except: 
+            my_chats = None
         return flask.render_template(
             "chat.html",
             login=True,
             created_chat=created_chat,
             all_chats=all_chats,
             chats_list=[],
-            modal= False
+            modal= False,
+            my_chats = my_chats
         )
     else:
         return flask.redirect("/register")
@@ -59,7 +64,7 @@ def create_chat_page():
             if chat_name:
                 new_chat = Chat(
                     name_chat = chat_name,
-                    img_chat = "avatar.png",
+                    img_chat = chat_name[:2].upper(),
                     last_msg = "Чат пустий",
                     creator_id=user.id,
                     users = [user]
@@ -87,4 +92,36 @@ def del_chat():
         return {
             "status": "success",
             "search": search
+        }
+
+
+def search():
+    name_of_chat = flask.request.args.get("name")
+    print(name_of_chat)
+    if name_of_chat:
+        finded_chats = Chat.query.filter(Chat.name_chat.ilike(f"%{name_of_chat}%")).all()
+        finded_chat_list = []
+        for chat in finded_chats:
+            finded_chat_list.append({
+                "id": chat.id,
+                "name_chat": chat.name_chat,
+                "img_chat": chat.img_chat,
+                "last_msg": chat.last_msg
+            })
+        return {
+            "status": "success",
+            "chats": finded_chat_list
+        }
+    
+def add_chat():
+    data = flask.request.get_json()
+    id = data.get('id')
+    user = flask_login.current_user
+    chat = Chat.query.get(int(id))
+
+    if user not in chat.users:
+        chat.users.append(user)
+        DATABASE.session.commit()
+    return {
+            "status": "success"
         }

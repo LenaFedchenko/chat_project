@@ -13,7 +13,7 @@
 <div class="all-page-chat">
     <div class="left-part">
         <div class="search-chat">
-            <input type="text" placeholder="Пошук чатів..." style="border: none; width:22vw">
+            <input type="text" name="search" placeholder="Пошук чатів..." style="border: none; width:22vw" class="search">
         </div>
         <hr style="width: 26.5vw;">
         <div class="all-chats">
@@ -31,11 +31,12 @@
             <hr style="width: 26.5vw;">
 
 
-            {% if all_chats != [] %}
+            {% if my_chats is not none %}
                 {% include 'particles/all-chats.html' %}
             {% else %}
                 <img src="{{url_for('chat.static', filename = 'images/noone.svg')}}" alt="">
             {% endif %}
+            <div class="search-results" style="display: none; flex-direction: column"></div>
 
         </div>
     </div>
@@ -89,4 +90,5 @@
 </div>
 
 <script src="{{ url_for('chat.static', filename='js/modalCreateChat.js') }}"></script>
+<script src="{{ url_for('chat.static', filename='js/searching.js') }}"></script>
 {% endblock  %}

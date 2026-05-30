@@ -15,6 +15,16 @@ chat.add_url_rule(
     view_func= del_chat,
     methods = ['GET', 'POST']
 )
+chat.add_url_rule(
+    rule="/search/",
+    view_func= search,
+    methods = ['GET', 'POST']
+)
+chat.add_url_rule(
+    rule="/add-chat/",
+    view_func= add_chat,
+    methods = ['GET', 'POST']
+)
 
 chat.add_url_rule(
     rule= "/",

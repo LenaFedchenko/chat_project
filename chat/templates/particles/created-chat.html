@@ -4,7 +4,7 @@
         <img src="{{url_for('chat.static', filename = 'images/bin.png')}}" alt="" class="del" style="cursor: pointer;">
     </div>
     <div class="example-chat">
-        <img src="{{url_for('chat.static', filename = 'images/avatar.png')}}" alt="">
+        <div class="avatar">{{created_chat.img_chat}}</div>
         <div class="all-exam">
             <div class="name-hact">
                 <h3 class="name">{{ created_chat.name_chat }}</h3>
