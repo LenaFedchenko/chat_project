@@ -20,3 +20,9 @@ class User(DATABASE.Model, flask_login.UserMixin):
         secondary="user_chat",
         back_populates="users"
     )
+
+    messages = DATABASE.relationship(
+        "Message",
+        back_populates="user",
+        cascade="all, delete-orphan"
+    )

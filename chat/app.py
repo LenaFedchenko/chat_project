@@ -1,4 +1,3 @@
-# Вова создать блюпринт для приложения чат
 import flask
 
 chat = flask.Blueprint(

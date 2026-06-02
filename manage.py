@@ -1,8 +1,10 @@
-from project.settings import main_app
+from project.settings import socketio, main_app
+import project
 
 def main():
     try:
-        main_app.run(debug = True, port=7060)
+        project.execute()
+        socketio.run(app= main_app, debug = True, port=7060)
     except Exception as error:
         print(error)
 

@@ -1,10 +1,22 @@
 from .settings import main_app
 from user.app import user
 from chat.app import chat
+from message.app import message
 
 from user.views import *
 from chat.views import *
+from message.socket import *
 
+message.add_url_rule(
+    rule = '/adding-room/',
+    view_func = join_room,
+    methods = ['GET', 'POST']
+)
+message.add_url_rule(
+    rule = '/send-message/',
+    view_func = send_message,
+    methods = ['GET', 'POST']
+)
 chat.add_url_rule(
     rule = '/create-chat/',
     view_func = create_chat_page,
@@ -66,4 +78,7 @@ main_app.register_blueprint(
 
 main_app.register_blueprint(
     blueprint= chat
+)
+main_app.register_blueprint(
+    blueprint= message
 )

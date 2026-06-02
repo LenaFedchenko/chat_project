@@ -40,6 +40,8 @@
 
         </div>
     </div>
+
+
     <div class="chat-place">
         <div class="settings-chat">
             <h3>General Chat</h3>
@@ -48,19 +50,24 @@
                 <img src="{{url_for('chat.static', filename = 'images/more.png')}}" alt="">
             </div>
         </div>
-        <div class="chat">
-            тут будет чат
+        <hr style="width: 46vw;">
+        <div class="chat" style="display: none;">
         </div>
         <div style="width: 46.5vw; height: 2.1vh;"></div>
         <div style="display: flex;">
             <div class="place-for-message">
                 <img src="{{url_for('chat.static', filename = 'images/emoji.png')}}" alt="">
-                <input class="typing-field" type="text" placeholder="Введіть повідомлення...">
-                <img src="{{url_for('chat.static', filename = 'images/send.png')}}" alt="">
+                <form action="" method="post" class="message-form">
+                    <input class="typing-field" type="text" placeholder="Введіть повідомлення..." name="message">
+                    <button type="submit" class="sub"><img src="{{url_for('chat.static', filename = 'images/send.png')}}" alt=""></button>
+                    
+                </form>
             </div>
         </div>
         
     </div>
+
+
     <div class="right-part">
         <div class="users">
             <p style="font-size: 1.25rem; margin:0px; font-weight:400">Користувачі</p>
@@ -90,5 +97,7 @@
 </div>
 
 <script src="{{ url_for('chat.static', filename='js/modalCreateChat.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.8.1/socket.io.js"></script>
 <script src="{{ url_for('chat.static', filename='js/searching.js') }}"></script>
+<script src="{{ url_for('message.static', filename='js/openChat.js') }}"></script>
 {% endblock  %}

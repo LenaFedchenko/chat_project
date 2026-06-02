@@ -9,6 +9,11 @@ class Chat(DATABASE.Model):
     last_msg = DATABASE.Column(DATABASE.String, nullable = False)
     creator_id = DATABASE.Column(DATABASE.Integer, DATABASE.ForeignKey("user.id"), nullable= False)
     users = DATABASE.relationship('User', secondary = 'user_chat', back_populates = 'chats')
+    messages = DATABASE.relationship(
+        "Message",
+        back_populates="chat",
+        cascade="all, delete-orphan"
+    )
 
 
 class UserChat(DATABASE.Model):

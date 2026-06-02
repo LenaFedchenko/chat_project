@@ -25,7 +25,8 @@ def render_chat():
             all_chats=all_chats,
             chats_list=[],
             modal= False,
-            my_chats = my_chats
+            my_chats = my_chats,
+            user = user
         )
     else:
         return flask.redirect("/register")
