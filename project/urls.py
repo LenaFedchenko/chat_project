@@ -8,6 +8,11 @@ from chat.views import *
 from message.socket import *
 
 message.add_url_rule(
+    rule = '/connection/',
+    view_func = connection,
+    methods = ['GET', 'POST']
+)
+message.add_url_rule(
     rule = '/adding-room/',
     view_func = join_room,
     methods = ['GET', 'POST']

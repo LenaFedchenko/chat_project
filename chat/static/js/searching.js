@@ -37,9 +37,18 @@ async function searchingChat(name) {
         }
     }
 }
-search.addEventListener('click', () => {
+search.addEventListener('click', (event) => {
+    // stopPropagation зупиняє поширення події на батьківські елементи, щоб уникнути конфліктів з іншими обробниками подій
+    event.stopPropagation()
     searchResults.style.display = 'flex'
     visible.style.display = 'none'
+})
+// Додаємо обробник події на документ, щоб приховати результати пошуку, коли користувач клікає поза межами поля пошуку та результатів
+document.addEventListener('click', (event) => {
+    if (!search.contains(event.target) && !searchResults.contains(event.target)) {
+        searchResults.style.display = 'none'
+        visible.style.display = 'flex'
+    }
 })
 
 searchResults.addEventListener('click', async(event) => {

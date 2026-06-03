@@ -2,18 +2,31 @@ import flask_socketio, flask_login
 from project.settings import socketio
 from .model import Message
 from project.db import DATABASE
+from chat.model import Chat
 
 
 
+@socketio.on("connect")
+def connection():
+    print('Вы подключились')
+
+    socketio.emit(
+        "message", 
+        {
+            "status": "success"
+        }
+    )
 
 @socketio.on("join_room")
 def join_room(data):
     chat_id = data.get("chat_id")
+    name_chat = Chat.query.filter_by(id= chat_id).scalar()
     flask_socketio.join_room(f"room-{chat_id}")
     socketio.emit(
         "join_room",
         {
-            "room": f"room-{chat_id}"
+            "room": f"room-{chat_id}",
+            "nameChat": name_chat.name_chat
         },
         to= f"room-{chat_id}"
     )
@@ -24,9 +37,9 @@ def join_room(data):
         user_name = msg.user.username
         if user_name is None:
             user_name = "anonimus"
-            ava = user_name[:2]
+            ava = user_name[:1].upper()
         else:
-            ava = user_name[:2]
+            ava = user_name[:1].upper()
         message_list.append({
             "username": user_name,
             "time": msg.time_of_msg.strftime("%H:%M"),
@@ -62,10 +75,9 @@ def send_message(data):
                 "message_text": message.text_of_message,
                 "chat_id": chat_id,
                 "username": username,
-                "ava": username[:2].upper(),
+                "ava": username[:1].upper(),
                 "time": message.time_of_msg.strftime("%H:%M"),
             },
             to= f"room-{chat_id}"
         )
-
 

@@ -3,7 +3,7 @@
         <h3>Ваш чат</h3>
         <img src="{{url_for('chat.static', filename = 'images/bin.png')}}" alt="" class="del" style="cursor: pointer;">
     </div>
-    <div class="example-chat">
+    <div class="example-chat" data-id="{{ created_chat.id }}">
         <div class="avatar">{{created_chat.img_chat}}</div>
         <div class="all-exam">
             <div class="name-hact">

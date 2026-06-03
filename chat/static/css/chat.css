@@ -14,18 +14,23 @@
 .settings-chat{
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content:space-between;
+    padding-left: 24px;
     width: 46.6vw;
     gap: 30vw;
 }
-.chat{
+.chat {
     display: flex;
     width: 46.6vw;
     height: 66.2vh;
-    flex-direction: column-reverse;
-    align-items: center;
-    justify-content: center;
-    overflow-y: scroll;
+    flex-direction: column;
+    align-items: left;
+    overflow-y: auto;
+    padding-left: 14px;
+}
+
+.chat .msg:first-child {
+    margin-top: auto;
 }
 .place-for-message{
     display: flex;
@@ -56,15 +61,26 @@
     display: flex;
     align-items: flex-start;
     gap: 0.75rem;
+    text-wrap: wrap;
+}
+
+.msg.my-message {
+    background-color: #F0F8FF;
+    padding: 12px 24px 12px 2px;
+    display: flex;
+    align-items: flex-start;
 }
 
 .texts {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.25rem;
     flex: 1;
-    text-align: left;
+    min-width: 0;
+    display: flex;
+    gap: 6px;
+    flex-direction: column;
+}
+
+.texts p {
+    overflow-wrap: break-word;
 }
 
 .sender {
@@ -95,4 +111,17 @@
     font-weight: 400;
     font-size: 16px;
     font-style:normal;
+}
+.sub{
+    width: 36px;
+    height: 36px;
+    background-color: transparent;
+    border: none;
+}
+.message-form{
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
 }
