@@ -22,35 +22,42 @@
 
             <!-- создать/созданный чат -->
             {% if created_chat is none  %}
-                <button class="create-chat-class">+ Створити чат</button>
-                {% include 'particles/create-chat.html' %}
+                <div class="creat">
+                    <button class="create-chat-class">+ Створити чат</button>
+                    {% include 'particles/create-chat.html' %}
+                </div>
             {% else %}
                 {% include 'particles/created-chat.html' %}
+                <hr style="width: 26.5vw;">
             {% endif %}
 
-            <hr style="width: 26.5vw;">
+            
 
 
-            {% if my_chats is not none %}
+            {% if my_chats %}
                 {% include 'particles/all-chats.html' %}
-            {% else %}
-                <img src="{{url_for('chat.static', filename = 'images/noone.svg')}}" alt="">
             {% endif %}
             <div class="search-results" style="display: none; flex-direction: column"></div>
 
         </div>
     </div>
 
-
+    {% include 'particles/modal-leaving.html' %}
     <div class="chat-place">
         <div class="settings-chat">
-            <h3 class="name-chat">General Chat</h3>
+            <h3 class="name-chat">Оберіть чат</h3>
             <div>
-                <img src="{{url_for('chat.static', filename = 'images/search.png')}}" alt="">
-                <img src="{{url_for('chat.static', filename = 'images/more.png')}}" alt="">
+                <img src="{{url_for('chat.static', filename = 'images/search.png')}}" alt="" style="cursor: pointer;">
+                <img src="{{url_for('chat.static', filename = 'images/more.png')}}" alt="" class="leaving" style="cursor: pointer;">
             </div>
         </div>
         <hr style="width: 46vw;">
+
+
+        <div class="no-chat" style="display: flex; align-items: center; justify-content: center;">
+            <img src="{{ url_for('chat.static', filename='images/noone.svg') }}" alt="" style="width: 306px; height: 176px;">
+        </div>
+
         <div class="chat" data-current-username="{{ current_user.username or 'anonimus' }}" style="display: none;">
         </div>
         <div style="width: 46.5vw; height: 2.1vh;"></div>
@@ -100,5 +107,6 @@
 <script src="{{ url_for('chat.static', filename='js/modalCreateChat.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.8.1/socket.io.js"></script>
 <script src="{{ url_for('chat.static', filename='js/searching.js') }}"></script>
-<script src="{{ url_for('message.static', filename='js/openChat.js') }}"></script>
+<script type="module" src="{{ url_for('message.static', filename='js/openChat.js') }}"></script>
+<script type="module" src="{{ url_for('message.static', filename='js/leavingChat.js') }}"></script>
 {% endblock  %}

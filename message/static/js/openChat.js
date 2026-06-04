@@ -3,11 +3,37 @@ const messages = document.querySelector(".chat")
 const messageForm = document.querySelector(".message-form")
 const messageSend = document.querySelector(".typing-field")
 const nameChat = document.querySelector('.name-chat')
+const noChat = document.querySelector('.no-chat')
 const currentUsername = messages.dataset.currentUsername
 
-let selectedChatId = localStorage.getItem("selectedChatId")
+export let selectedChatId = localStorage.getItem("selectedChatId")
 
-const socket = io()
+export const socket = io()
+
+// сначала скрываем чат и показываем заглушку
+messages.style.display = "none"
+
+if (noChat) {
+    noChat.style.display = "flex"
+}
+
+// если в localStorage был выбранный чат
+if (selectedChatId) {
+    const activeChat = document.querySelector(`.example-chat[data-id="${selectedChatId}"]`)
+
+    if (activeChat) {
+        activeChat.style.backgroundColor = "#F0F8FF"
+        messages.style.display = "flex"
+
+        if (noChat) {
+            noChat.style.display = "none"
+        }
+    } else {
+        // если такого чата уже нет — чистим localStorage
+        selectedChatId = null
+        localStorage.removeItem("selectedChatId")
+    }
+}
 
 if (selectedChatId) {
     const activeChat = document.querySelector(`.example-chat[data-id="${selectedChatId}"]`)
@@ -19,7 +45,7 @@ if (selectedChatId) {
 }
 
 socket.on("connect", () => {
-    console.log("Ви під'єднались")
+    // console.log("Ви під'єднались")
 
     if (selectedChatId) {
         socket.emit("join_room", {
@@ -35,23 +61,14 @@ function scrollToBottom() {
 function myMessageClass(username) {
     return username === currentUsername ? "my-message" : ""
 }
-// выделение одного чата
-selectedChats.forEach((chat) => {
-    chat.addEventListener("click", () => {
-        selectedChats.forEach((item) => {
-            item.style.backgroundColor = "transparent"
-        })
-        chat.style.backgroundColor = "#F0F8FF"
-    })
-})
 
 socket.on("join_room", (data) => {
-    console.log(data)
+    // console.log(data)
     nameChat.textContent = data.nameChat
 })
 
 socket.on("load_messages", (data) => {
-    console.log("loded messages", data.messages)
+    // console.log("loded messages", data.messages)
     messages.innerHTML = ""
     data.messages.forEach((msg) => {
         messages.innerHTML += `
@@ -87,7 +104,7 @@ socket.on("message", (data) => {
             </div>
         `
     scrollToBottom()
-
+    location.reload()
 })
 
 
@@ -98,10 +115,15 @@ selectedChats.forEach((chat) => {
         })
 
         chat.style.backgroundColor = "#F0F8FF"
-        messages.style.display = "flex"
 
         selectedChatId = chat.dataset.id
         localStorage.setItem("selectedChatId", selectedChatId)
+
+        messages.style.display = "flex"
+
+        if (noChat) {
+            noChat.style.display = "none"
+        }
 
         socket.emit("join_room", {
             chat_id: selectedChatId

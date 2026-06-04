@@ -7,6 +7,13 @@ from user.views import *
 from chat.views import *
 from message.socket import *
 
+
+message.add_url_rule(
+    rule= '/leave-room/',
+    view_func= leave_room,
+    methods= ['GET', 'POST']
+)
+
 message.add_url_rule(
     rule = '/connection/',
     view_func = connection,
@@ -48,7 +55,11 @@ chat.add_url_rule(
     view_func= render_chat,
     methods = ['GET', 'POST']
 )
-
+user.add_url_rule(
+    rule= '/success/',
+    view_func= success,
+    methods = ['GET', 'POST']
+)
 user.add_url_rule(
     rule = '/login/',
     view_func = render_login,

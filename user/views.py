@@ -7,7 +7,7 @@ from .send_email import send_email
 
 
 def render_register():
-    message = ""
+
     if flask.request.method == "POST":
         email = flask.request.form["email"]
         password = flask.request.form["password"]
@@ -22,10 +22,10 @@ def render_register():
                 DATABASE.session.add(user)
                 DATABASE.session.commit()
                 send_email(email= email, user_id=user.id)
-                message = "Перейдіть на пошту та підтвердіть її"
-                # return flask.redirect('/')
+                # Вова, редиректить на страничку успееза, название ссылки посмотреть у Каролины
+                return flask.redirect('/success')
 
-    return flask.render_template("register.html", message = message)
+    return flask.render_template("register.html")
 
 
 def render_login():
@@ -59,3 +59,7 @@ def del_account():
     DATABASE.session.delete(user)
     DATABASE.session.commit()
     return flask.redirect("/register")
+
+
+def success():
+    return flask.render_template("success.html")

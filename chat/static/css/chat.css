@@ -16,10 +16,16 @@
     align-items: center;
     justify-content:space-between;
     padding-left: 24px;
-    width: 46.6vw;
-    gap: 30vw;
+    width: 43.6vw;
+    gap: 20vw;
 }
-.chat {
+.creat{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.chat, .no-chat {
     display: flex;
     width: 46.6vw;
     height: 66.2vh;

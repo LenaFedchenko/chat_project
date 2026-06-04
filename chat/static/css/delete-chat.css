@@ -1,4 +1,4 @@
-.sec {
+.sec, .sec2 {
     position: fixed;
     top: 0;
     left: 0;
@@ -43,7 +43,7 @@
     color: #070A1C;
 }
 
-.close2 {
+.close2, .close22 {
     width: 2rem;
     height: 2rem;
 
@@ -54,7 +54,7 @@
     cursor: pointer;
 }
 
-.close2:hover {
+.close2:hover, .close2:hover {
     background-color: #F1F1F4;
 }
 
@@ -74,7 +74,8 @@
 }
 
 .cancel2,
-.delete {
+.delete, .delete2,
+.cancel22 {
     height: 2.5rem;
     padding: 0 1.2rem;
 
@@ -86,22 +87,22 @@
     cursor: pointer;
 }
 
-.cancel2 {
+.cancel2, .cancel22 {
     background-color: white;
     border: 1px solid #007AFF;
     color: #007AFF;
 }
 
-.cancel2:hover {
+.cancel2:hover, .cancel22:hover {
     background-color: #F0F7FF;
 }
 
-.delete {
+.delete, .delete2 {
     background-color: #007AFF;
     border: 1px solid #007AFF;
     color: white;
 }
 
-.delete:hover {
+.delete:hover, .delete2:hover {
     background-color: #0066D6;
 }

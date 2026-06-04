@@ -11,7 +11,7 @@ def connection():
     print('Вы подключились')
 
     socketio.emit(
-        "message", 
+        "connection_status",
         {
             "status": "success"
         }
@@ -36,7 +36,7 @@ def join_room(data):
     for msg in message :
         user_name = msg.user.username
         if user_name is None:
-            user_name = "anonimus"
+            user_name = msg.user.email
             ava = user_name[:1].upper()
         else:
             ava = user_name[:1].upper()
@@ -64,11 +64,13 @@ def send_message(data):
             chat_id = chat_id,
             user_id = flask_login.current_user.id
         )
+        chat_filter_id = Chat.query.filter_by(id= chat_id).scalar()
+        chat_filter_id.last_msg = message.text_of_message
         DATABASE.session.add(message)
         DATABASE.session.commit()
         username = flask_login.current_user.username
         if username == None:
-            username = "anonimus"
+            username = flask_login.current_user.email
         socketio.emit(
             "message",
             {
@@ -81,3 +83,39 @@ def send_message(data):
             to= f"room-{chat_id}"
         )
 
+
+@socketio.on("leave_room")
+def leave_room(data):
+    chat_id = data.get("chat_id")
+
+    chat_filter_id2 = Chat.query.filter_by(id= chat_id).scalar()
+
+    current_user = flask_login.current_user
+    if current_user.username is not None:
+        username = current_user.username
+    else:
+        username = current_user.email
+        
+    message = Message(
+        text_of_message = f'{username} покинув чат', 
+        chat_id = chat_filter_id2.id, 
+        user_id = current_user.id
+    )
+
+    DATABASE.session.add(message)
+    # Каролина, проверить, если chat_filter_id2 его создатель(поле посмотри в моделе чата), равно айди текущего пользователя
+    if chat_filter_id2.creator_id == current_user.id:
+        chat_filter_id2.users.clear()
+        DATABASE.session.delete(chat_filter_id2)
+    elif current_user in chat_filter_id2.users:
+        chat_filter_id2.users.remove(current_user)
+    DATABASE.session.commit()
+    flask_socketio.leave_room(f"room-{chat_id}")
+
+    socketio.emit("leave_room", {
+        "status": "success",
+        "chat_id": chat_id,
+        "user_leaved": current_user.id,
+        "username": username
+    },
+    to=f"room-{chat_id}")

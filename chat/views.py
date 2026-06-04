@@ -60,7 +60,6 @@ def create_chat_page():
         is_create = Chat.query.filter_by(
                 creator_id=user.id
             ).first()
-
         if is_create is None:
             if chat_name:
                 new_chat = Chat(
