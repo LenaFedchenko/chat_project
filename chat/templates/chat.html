@@ -12,10 +12,10 @@
 {% block content %}
 <div class="all-page-chat">
     <div class="left-part">
-        <div class="search-chat">
+        <div class="search-chat" style="border: 1px #E2E1EC solid;">
             <input type="text" name="search" placeholder="Пошук чатів..." style="border: none; width:22vw" class="search">
         </div>
-        <hr style="width: 26.5vw;">
+        <!-- <hr style="width: 26.5vw;"> -->
         <div class="all-chats">
 
             {% include 'particles/modal-del.html' %}
@@ -28,7 +28,7 @@
                 </div>
             {% else %}
                 {% include 'particles/created-chat.html' %}
-                <hr style="width: 26.5vw;">
+                <!-- <hr style="width: 26.5vw;"> -->
             {% endif %}
 
             
@@ -45,24 +45,28 @@
     {% include 'particles/modal-leaving.html' %}
     <div class="chat-place">
         <div class="settings-chat">
-            <h3 class="name-chat">Оберіть чат</h3>
+            <p class="name-chat">Оберіть чат</p>
             <div>
                 <img src="{{url_for('chat.static', filename = 'images/search.png')}}" alt="" style="cursor: pointer;">
                 <img src="{{url_for('chat.static', filename = 'images/more.png')}}" alt="" class="leaving" style="cursor: pointer;">
             </div>
         </div>
-        <hr style="width: 46vw;">
+        <!-- <hr style="width: 46vw;"> -->
 
 
         <div class="no-chat" style="display: flex; align-items: center; justify-content: center;">
             <img src="{{ url_for('chat.static', filename='images/noone.svg') }}" alt="" style="width: 306px; height: 176px;">
         </div>
 
-        <div class="chat" data-current-username="{{ current_user.username or 'anonimus' }}" style="display: none;">
+        <div
+            class="chat"
+            data-current-user-id="{{ current_user.id }}"
+            data-current-username="{{ current_user.username or current_user.email }}"
+            style="display: none;"
+        >
         </div>
-        <div style="width: 46.5vw; height: 2.1vh;"></div>
-        <hr style="width: 46vw;">
-        <div style="display: flex;">
+        <!-- <hr style="width: 46vw;"> -->
+        <div class="message-panel">
             <div class="place-for-message">
                 <img src="{{url_for('chat.static', filename = 'images/emoji.png')}}" alt="">
                 <form action="" method="post" class="message-form">

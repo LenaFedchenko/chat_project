@@ -42,6 +42,7 @@ def join_room(data):
             ava = user_name[:1].upper()
         message_list.append({
             "username": user_name,
+            "user_id": msg.user_id,
             "time": msg.time_of_msg.strftime("%H:%M"),
             "ava": ava,
             "message": msg.text_of_message
@@ -77,6 +78,7 @@ def send_message(data):
                 "message_text": message.text_of_message,
                 "chat_id": chat_id,
                 "username": username,
+                "user_id": flask_login.current_user.id,
                 "ava": username[:1].upper(),
                 "time": message.time_of_msg.strftime("%H:%M"),
             },

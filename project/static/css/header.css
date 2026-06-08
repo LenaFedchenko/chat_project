@@ -3,7 +3,9 @@
     height: 6.5vh;
     gap: 0.66vw;
 }
-
+header{
+    font-family: 'Inter', sans-serif;
+}
 .logo{
     display: flex;
     gap: 0.39vw;

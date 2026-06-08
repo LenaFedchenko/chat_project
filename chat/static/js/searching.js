@@ -25,7 +25,7 @@ async function searchingChat(name) {
                     <div class="avatar">${chat.img_chat}</div>
                     <div class="all-exam">
                         <div class="name-hact">
-                            <h3 class="name">${chat.name_chat}</h3>
+                            <p class="name">${chat.name_chat}</p>
                             <p>15m ago</p>
                         </div>
                         <div>

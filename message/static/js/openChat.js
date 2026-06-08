@@ -5,6 +5,7 @@ const messageSend = document.querySelector(".typing-field")
 const nameChat = document.querySelector('.name-chat')
 const noChat = document.querySelector('.no-chat')
 const currentUsername = messages.dataset.currentUsername
+const currentUserId = messages.dataset.currentUserId
 
 export let selectedChatId = localStorage.getItem("selectedChatId")
 
@@ -58,8 +59,12 @@ function scrollToBottom() {
     messages.scrollTop = messages.scrollHeight
 }
 
-function myMessageClass(username) {
-    return username === currentUsername ? "my-message" : ""
+function myMessageClass(username, userId) {
+    if (userId !== undefined && userId !== null) {
+        return String(userId) === currentUserId ? "my-message" : ""
+    }
+
+    return String(username).trim() === String(currentUsername).trim() ? "my-message" : ""
 }
 
 socket.on("join_room", (data) => {
@@ -72,7 +77,7 @@ socket.on("load_messages", (data) => {
     messages.innerHTML = ""
     data.messages.forEach((msg) => {
         messages.innerHTML += `
-            <div class="msg ${myMessageClass(msg.username)}">
+            <div class="msg ${myMessageClass(msg.username, msg.user_id)}">
                 <div class="avatar">${msg.ava}</div>
 
                 <div class="texts">
@@ -90,7 +95,7 @@ socket.on("load_messages", (data) => {
 
 socket.on("message", (data) => {
     messages.innerHTML += `
-            <div class="msg ${myMessageClass(data.username)}">
+            <div class="msg ${myMessageClass(data.username, data.user_id)}">
                 <div class="avatar">${data.ava}</div>
 
                 <div class="texts">

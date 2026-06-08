@@ -3,7 +3,9 @@
 .right-part *{
     box-sizing: border-box;
 }
-
+** {
+    font-family: 'Inter', sans-serif;
+}
 .right-part{
     display: flex;
     width: 26.5vw;
@@ -76,7 +78,7 @@
     height: 30vh;
     align-items: center;
     justify-content: center;
-    border-top: 1px solid #007AFF26;
+    border-top: 1px solid #E2E1EC;
     padding: 16px;
     text-align: center;
     flex-shrink: 0;

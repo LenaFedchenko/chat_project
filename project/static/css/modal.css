@@ -1,3 +1,6 @@
+** {
+    font-family: 'Inter', sans-serif;
+}
 .modal{
     display: flex;
     flex-direction: column;
