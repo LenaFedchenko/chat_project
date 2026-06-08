@@ -2,6 +2,8 @@
     display: flex;
     height: 6.5vh;
     gap: 0.66vw;
+    align-items: center;
+    justify-content: center;
 }
 header{
     font-family: 'Inter', sans-serif;

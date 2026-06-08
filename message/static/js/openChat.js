@@ -11,6 +11,12 @@ export let selectedChatId = localStorage.getItem("selectedChatId")
 
 export const socket = io()
 
+const avatarColors = ["#4DA6FF", "#F39C12", "#1ABC9C", "#9B59B6", "#FF3B30", "#3498DB", "#34495E"]
+
+function avatarColor(userId) {
+    return avatarColors[(userId - 1) % avatarColors.length]
+}
+
 // сначала скрываем чат и показываем заглушку
 messages.style.display = "none"
 
@@ -78,7 +84,7 @@ socket.on("load_messages", (data) => {
     data.messages.forEach((msg) => {
         messages.innerHTML += `
             <div class="msg ${myMessageClass(msg.username, msg.user_id)}">
-                <div class="avatar">${msg.ava}</div>
+                <div class="avatar" style="background-color: ${avatarColor(msg.user_id)}">${msg.ava}</div>
 
                 <div class="texts">
                     <div class="sender">
@@ -96,7 +102,7 @@ socket.on("load_messages", (data) => {
 socket.on("message", (data) => {
     messages.innerHTML += `
             <div class="msg ${myMessageClass(data.username, data.user_id)}">
-                <div class="avatar">${data.ava}</div>
+                <div class="avatar" style="background-color: ${avatarColor(data.user_id)}">${data.ava}</div>
 
                 <div class="texts">
                     <div class="sender">
