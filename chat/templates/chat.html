@@ -86,21 +86,15 @@
             <div class="status">
                 <div class="status-users">
                     <img style="width: 12px; height:12px;" src="{{url_for('chat.static', filename = 'images/people.png')}}" alt="">
-                    <p style="font-size: 0.75rem">24 пользователя</p>
+                    <p style="font-size: 0.75rem" class="count-users">0 пользователей</p>
                 </div>
                 <div class="status-users">
                     <img style="width: 12px; height:12px;" src="{{url_for('chat.static', filename = 'images/people.png')}}" alt="">
-                    <p style="font-size: 0.75rem">8 online</p>
+                    <p style="font-size: 0.75rem" class="count-online"></p>
                 </div>
             </div>
         </div>
         <div class="people-online">
-            {% for i in range(8) %}
-                <div class="person">
-                    <img src="{{url_for('chat.static', filename = 'images/avatar.png')}}" alt="">
-                    <p>Іван Петренко</p>
-                </div>
-            {% endfor %}
         </div>
         <div class="account-settings">
             Тут будуть настройки акаунта
@@ -113,4 +107,5 @@
 <script src="{{ url_for('chat.static', filename='js/searching.js') }}"></script>
 <script type="module" src="{{ url_for('message.static', filename='js/openChat.js') }}"></script>
 <script type="module" src="{{ url_for('message.static', filename='js/leavingChat.js') }}"></script>
+<script type="module" src="{{ url_for('message.static', filename='js/users.js') }}"></script>
 {% endblock  %}

@@ -9,7 +9,14 @@ const messages = document.querySelector('.chat')
 
 
 socket.on('leave_room', (data) => {
-    messages.innerHTML = `<p>${data.username} покинув чат</p>`
+    if (String(data.chat_id) !== String(selectedChatId)) {
+        return
+    }
+
+    messages.innerHTML += `<p>${data.username} покинув чат</p>`
+    socket.emit('get_users', {
+        chat_id: selectedChatId
+    })
 })
 
 leavingButton.addEventListener('click', () => {
@@ -27,6 +34,13 @@ btnСancel2.addEventListener('click', () => {
 
 
 btnDel.addEventListener('click', () => {
-    socket.emit('leave_room', {chat_id: selectedChatId})
+    socket.emit('leave_room', {
+        chat_id: selectedChatId
+    }, (response) => {
+        if (response.status === "success") {
+            localStorage.removeItem("selectedChatId")
+            location.reload()
+        }
+    })
     location.reload()
 })

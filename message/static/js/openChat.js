@@ -10,6 +10,7 @@ const currentUserId = messages.dataset.currentUserId
 export let selectedChatId = localStorage.getItem("selectedChatId")
 
 export const socket = io()
+let previousChatId = null
 
 const avatarColors = ["#4DA6FF", "#F39C12", "#1ABC9C", "#9B59B6", "#FF3B30", "#3498DB", "#34495E"]
 
@@ -53,11 +54,17 @@ if (selectedChatId) {
 
 socket.on("connect", () => {
     // console.log("Ви під'єднались")
+    previousChatId = null
 
     if (selectedChatId) {
         socket.emit("join_room", {
             chat_id: selectedChatId
         })
+        socket.emit('get_users', {
+            chat_id: selectedChatId
+        })
+
+        previousChatId = selectedChatId
     }
 })
 
@@ -100,6 +107,10 @@ socket.on("load_messages", (data) => {
 })
 
 socket.on("message", (data) => {
+    if (String(data.chat_id) !== String(selectedChatId)) {
+        return
+    }
+
     messages.innerHTML += `
             <div class="msg ${myMessageClass(data.username, data.user_id)}">
                 <div class="avatar" style="background-color: ${avatarColor(data.user_id)}">${data.ava}</div>
@@ -115,7 +126,15 @@ socket.on("message", (data) => {
             </div>
         `
     scrollToBottom()
-    location.reload()
+    const chatItem = document.querySelector(`.example-chat[data-id="${data.chat_id}"]`)
+
+    if (chatItem) {
+        const lastMsg = chatItem.querySelector(".last-msg")
+
+        if (lastMsg) {
+            lastMsg.textContent = data.message_text
+        }
+    }
 })
 
 
@@ -136,9 +155,20 @@ selectedChats.forEach((chat) => {
             noChat.style.display = "none"
         }
 
+        if (previousChatId && String(previousChatId) !== String(selectedChatId)) {
+            socket.emit("leave_socket_room", {
+                chat_id: previousChatId
+            })
+        }
+
         socket.emit("join_room", {
             chat_id: selectedChatId
         })
+        socket.emit('get_users', {
+            chat_id: selectedChatId
+        })
+
+        previousChatId = selectedChatId
     })
 })
 messageForm.addEventListener("submit", (event) => {

@@ -3,6 +3,7 @@ from project.settings import socketio
 from .model import Message
 from project.db import DATABASE
 from chat.model import Chat
+import flask
 
 
 
@@ -28,7 +29,7 @@ def join_room(data):
             "room": f"room-{chat_id}",
             "nameChat": name_chat.name_chat
         },
-        to= f"room-{chat_id}"
+        to= flask.request.sid
     )
 
     message =  Message.query.filter_by(chat_id = chat_id).all()
@@ -51,7 +52,7 @@ def join_room(data):
     socketio.emit(
         "load_messages", 
         {"messages": message_list},
-        to= f"room-{chat_id}"
+        to= flask.request.sid
     )
 
 
@@ -105,7 +106,6 @@ def leave_room(data):
     )
 
     DATABASE.session.add(message)
-    # Каролина, проверить, если chat_filter_id2 его создатель(поле посмотри в моделе чата), равно айди текущего пользователя
     if chat_filter_id2.creator_id == current_user.id:
         chat_filter_id2.users.clear()
         DATABASE.session.delete(chat_filter_id2)
@@ -121,3 +121,37 @@ def leave_room(data):
         "username": username
     },
     to=f"room-{chat_id}")
+
+
+@socketio.on('get_users')
+def get_users(data):
+    chat_id = data.get("chat_id")
+    chat_filter = Chat.query.filter_by(id = chat_id).first()
+    users_in_chat = chat_filter.users
+    users_list = []
+    if users_in_chat:
+        for user in users_in_chat:
+            users_list.append({
+                "id": user.id,
+                "email": user.email,
+                "first_name": user.first_name,
+                "last_name": user.last_name,
+                "username" : user.username
+                })
+        socketio.emit("get_users", {
+            "status": "success",
+            "chat_id": chat_id,
+            "users": users_list
+        }, to=f"room-{chat_id}")
+    else:
+        socketio.emit("get_users",
+        {
+            "status" : "404",
+            "chat_id": chat_id
+        }, to=f"room-{chat_id}")
+        
+# выход из комнаты
+@socketio.on("leave_socket_room")
+def leave_socket_room(data):
+    chat_id = data.get("chat_id")
+    flask_socketio.leave_room(f"room-{chat_id}")

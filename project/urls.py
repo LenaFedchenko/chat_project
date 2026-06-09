@@ -9,6 +9,16 @@ from message.socket import *
 
 
 message.add_url_rule(
+    rule = '/get-users/',
+    view_func = get_users,
+    methods = ['GET', 'POST']
+)
+message.add_url_rule(
+    rule = '/leave-socket-room/',
+    view_func = leave_socket_room,
+    methods = ['GET', 'POST']
+)
+message.add_url_rule(
     rule= '/leave-room/',
     view_func= leave_room,
     methods= ['GET', 'POST']
