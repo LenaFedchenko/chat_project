@@ -11,6 +11,12 @@ function avatarColor(userId) {
     return avatarColors[(userId - 1) % avatarColors.length]
 }
 
+function updateOnlineUsers(){
+    const onlineUsers = document.querySelectorAll('.status-circle[data-status="online"]')
+    countOnline.textContent = `${onlineUsers.length} online`
+}
+
+    
 socket.on('get_users', (data) => {
     if (String(data.chat_id) !== String(selectedChatId)) {
         return
@@ -25,24 +31,39 @@ socket.on('get_users', (data) => {
         if (user.first_name) {
             if (user.last_name) {
                 peopleOnline.innerHTML += `
-                    <div class="person">
-                        <div class="us" style="background-color: ${avatarColor(user.id)}">${user.first_name.slice(0, 2).toUpperCase()}</div>
-                        <p>${user.first_name} ${user.last_name}</p>
+                    <div class="person" data-user-id="${user.id}">
+                        <div class="us" style="background-color: ${avatarColor(user.id)}">
+                            ${user.first_name.slice(0, 1).toUpperCase()}
+                            <span class="status-circle"></span>
+                        </div>
+                        <div>
+                            <p>${user.first_name} ${user.last_name}</p>
+                        </div>
                     </div>
                     `
                 }else{
                     peopleOnline.innerHTML += `
-                    <div class="person">
-                        <div class="us" style="background-color: ${avatarColor(user.id)}">${user.first_name.slice(0, 1).toUpperCase()}</div>
-                        <p>${user.first_name}</p>
+                    <div class="person" data-user-id="${user.id}">
+                        <div class="us" style="background-color: ${avatarColor(user.id)}">
+                            ${user.first_name.slice(0, 1).toUpperCase()}
+                            <span class="status-circle"></span>
+                        </div>
+                        <div>
+                            <p>${user.first_name}</p>
+                        </div>
                     </div>
                     `
                 }
             }else{
                 peopleOnline.innerHTML += `
-                <div class="person">
-                    <div class="us" style="background-color: ${avatarColor(user.id)}">${user.email.slice(0, 1).toUpperCase()}</div>
-                    <p>${user.email}</p>
+                <div class="person" data-user-id="${user.id}">
+                    <div class="us" style="background-color: ${avatarColor(user.id)}">
+                        ${user.email.slice(0, 1).toUpperCase()}
+                        <span class="status-circle"></span>
+                    </div>
+                    <div>
+                        <p>${user.email}</p>
+                    </div>
                 </div>
                 `
             }
@@ -51,4 +72,54 @@ socket.on('get_users', (data) => {
     countUsersP.textContent = `${countUsers} пользователя` 
 })
 
+socket.on('status_user', (data) => {
+    if(String(data.chat_id) !== String(selectedChatId)){
+        return
+    }
+    console.log(data.online_users)
+    data.status.forEach((userStatus) => {
+        const person = document.querySelector(`.person[data-user-id="${userStatus.id}"]`)
+        if (!person){ return }
+        const status = person.querySelector(".status-circle")
+        
+
+        if(status){
+            if(userStatus.status.includes("ON line") || userStatus.status === "online"){
+                status.style.backgroundColor = "#007AFF"
+                status.dataset.status = "online"
+            }else{
+                status.style.backgroundColor = "#999999"
+                status.dataset.status = "offline"
+            }
+        }
+    })
+
+    countOnline.textContent = `${data.online_users} online`
+})
+
+
+socket.on('disconnect', () => {
+    console.log("Вы отсоеденились")
+}) 
+
+
+socket.on("user_status_changed", (data) => {
+    const person = document.querySelector(`.person[data-user-id="${data.user_id}"]`)
+    if (!person){ return }
+    const status = person.querySelector(".status-circle")
+
+    if (status) {
+        if (data.status === 'online') {
+            status.style.backgroundColor = "#007AFF"
+            status.dataset.status = "online"
+        }else{
+            status.style.backgroundColor = "#999999"
+            status.dataset.status = "offline"
+        }
+        updateOnlineUsers()
+    }
+
+    
+    
+})
 

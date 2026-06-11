@@ -1,22 +1,30 @@
 import flask_socketio, flask_login
+import flask
 from project.settings import socketio
 from .model import Message
 from project.db import DATABASE
 from chat.model import Chat
-import flask
-
+from .app import online_users
 
 
 @socketio.on("connect")
 def connection():
     print('Вы подключились')
-
-    socketio.emit(
-        "connection_status",
+    
+    id_user = flask_login.current_user.id
+    sid = flask.request.sid
+    if id_user not in online_users:
+        online_users[id_user] = set()
+    online_users[id_user].add(sid)
+    
+    socketio.emit('user_status_changed', 
         {
-            "status": "success"
+            'user_id': id_user,
+            'status': 'online'
         }
     )
+    
+    
 
 @socketio.on("join_room")
 def join_room(data):
@@ -49,6 +57,34 @@ def join_room(data):
             "message": msg.text_of_message
             
         })
+
+    user_status = []
+    chat_filter_id = Chat.query.get(chat_id)
+
+    users = chat_filter_id.users
+    users_online = 0
+
+    for user in users:
+        if user.id in online_users.keys():
+            status = "ON line"
+            users_online += 1
+        else:
+            status = "OFF line"
+        user_status.append({
+            "id": user.id,
+            "username": user.username or user.email,
+            "ava": (user.username or user.email)[:1].upper(),
+            "status": status
+        })
+    socketio.emit('status_user',
+        {
+            'status': user_status,
+            'chat_id': chat_id,
+            'online_users': users_online,
+        },to= f"room-{chat_id}"
+    )
+    
+    
     socketio.emit(
         "load_messages", 
         {"messages": message_list},
@@ -155,3 +191,19 @@ def get_users(data):
 def leave_socket_room(data):
     chat_id = data.get("chat_id")
     flask_socketio.leave_room(f"room-{chat_id}")
+
+
+@socketio.on("disconnect")
+def disconnect():
+
+    current_user_id = flask_login.current_user.id
+    online_users[current_user_id].discard(flask.request.sid)
+
+    if online_users[current_user_id] == set():
+        del online_users[current_user_id]
+
+    socketio.emit("user_status_changed", {
+        "user_id" : current_user_id,
+        "status": "offline"
+    })
+

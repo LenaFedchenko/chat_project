@@ -7,3 +7,4 @@ message = flask.Blueprint(
     static_folder= "static",
     static_url_path= "/message/static/"
 )
+online_users = {}

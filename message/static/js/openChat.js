@@ -53,7 +53,7 @@ if (selectedChatId) {
 }
 
 socket.on("connect", () => {
-    // console.log("Ви під'єднались")
+    console.log("Ви під'єднались")
     previousChatId = null
 
     if (selectedChatId) {

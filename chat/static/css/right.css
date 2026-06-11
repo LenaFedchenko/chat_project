@@ -16,6 +16,7 @@
     border: 1px #E2E1EC solid;
 }
 .us{
+    position: relative;
     width: 32px; 
     height: 32px; 
     border-radius:50%; 
@@ -29,6 +30,17 @@
     font-size: 12px;
     line-height: 16px;
     letter-spacing: 0;
+}
+
+.status-circle {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #999999;
+    border: 2px solid #FFFFFF;
 }
 .person p{
     font-family: "Inter", sans-serif;
