@@ -12,7 +12,7 @@
 {% block content %}
 <div class="all-page-chat">
     <div class="left-part">
-        <div class="search-chat" style="border: 1px #E2E1EC solid;">
+        <div class="search-chat" style="border: 0.0625rem #E2E1EC solid;">
             <input type="text" name="search" placeholder="Пошук чатів..." style="border: none; width:22vw" class="search">
         </div>
         <!-- <hr style="width: 26.5vw;"> -->
@@ -55,7 +55,7 @@
 
 
         <div class="no-chat" style="display: flex; align-items: center; justify-content: center;">
-            <img src="{{ url_for('chat.static', filename='images/noone.svg') }}" alt="" style="width: 306px; height: 176px;">
+            <img src="{{ url_for('chat.static', filename='images/noone.svg') }}" alt="" style="width: 19.125rem; height: 11rem;">
         </div>
 
         <div
@@ -82,14 +82,14 @@
 
     <div class="right-part">
         <div class="users">
-            <p style="font-size: 1.25rem; margin:0px; font-weight:400">Користувачі</p>
+            <p style="font-size: 1.25rem; margin:0; font-weight:400">Користувачі</p>
             <div class="status">
                 <div class="status-users">
-                    <img style="width: 12px; height:12px;" src="{{url_for('chat.static', filename = 'images/people.png')}}" alt="">
+                    <img style="width: 0.75rem; height:0.75rem;" src="{{url_for('chat.static', filename = 'images/people.png')}}" alt="">
                     <p style="font-size: 0.75rem" class="count-users">0 пользователей</p>
                 </div>
                 <div class="status-users">
-                    <img style="width: 12px; height:12px;" src="{{url_for('chat.static', filename = 'images/people.png')}}" alt="">
+                    <img style="width: 0.75rem; height:0.75rem;" src="{{url_for('chat.static', filename = 'images/people.png')}}" alt="">
                     <p style="font-size: 0.75rem" class="count-online"></p>
                 </div>
             </div>

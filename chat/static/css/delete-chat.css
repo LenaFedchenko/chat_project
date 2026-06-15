@@ -29,7 +29,7 @@
     flex-direction: column;
     gap: 1rem;
 
-    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.18);
+    box-shadow: 0 0.625rem 2.1875rem rgba(0, 0, 0, 0.18);
 }
 
 .modal-header {
@@ -92,7 +92,7 @@
 
 .cancel2, .cancel22 {
     background-color: white;
-    border: 1px solid #007AFF;
+    border: 0.0625rem solid #007AFF;
     color: #007AFF;
 }
 
@@ -102,7 +102,7 @@
 
 .delete, .delete2 {
     background-color: #007AFF;
-    border: 1px solid #007AFF;
+    border: 0.0625rem solid #007AFF;
     color: white;
 }
 

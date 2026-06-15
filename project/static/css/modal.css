@@ -9,7 +9,7 @@
     height: 74.8vh;
     gap: 1.6vh;
     padding: 1.6vh;
-    border: 0.06rem #E2E1EC solid;
+    border: 0.0625rem #E2E1EC solid;
     background-color: white;
 
     position: fixed;
@@ -89,14 +89,19 @@ button{
     width: 28.9vw;
     height: 4vh;
     border-radius: 0.25rem;
-    border: 0.06rem #E4E4E7 solid;
+    border: 0.0625rem #E4E4E7 solid;
 }
 
 .btn-sel{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 9.8vw;
     height: 2vh;
     background-color: transparent;
     border: none;
+    text-decoration: none;
+    color: #09090B;
 }
 
 .btns{
@@ -113,7 +118,7 @@ button{
     height: 4vh;
     color: #007AFF;
     background-color: transparent;
-    border: 0.06rem #007AFF solid;
+    border: 0.0625rem #007AFF solid;
     border-radius: 0.4rem;
 }
 
@@ -131,7 +136,7 @@ button{
     height: 4vh;
     color: #007AFF;
     background-color: transparent;
-    border: 0.06rem #007AFF solid;
+    border: 0.0625rem #007AFF solid;
     border-radius: 0.4rem;
 }
 
@@ -140,7 +145,7 @@ button{
     height: 4vh;
     color: #0D133F;
     background-color: transparent;
-    border: 0.06rem #0D133F solid;
+    border: 0.0625rem #0D133F solid;
     border-radius: 0.4rem;
 }
 

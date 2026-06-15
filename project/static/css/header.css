@@ -15,8 +15,8 @@ header{
     align-items: center;
 }
 .logo img{
-    width: 20px;
-    height: 20px;
+    width: 1.25rem;
+    height: 1.25rem;
 }
 .logo p{
     font-size: 1.25rem;
@@ -24,6 +24,6 @@ header{
     color: #1A1A1A;
 }
 .header img{
-    height: 40px;
-    width: 40px;
+    height: 2.5rem;
+    width: 2.5rem;
 }

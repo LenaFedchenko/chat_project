@@ -27,30 +27,30 @@ def send_email(email, user_id):
 
             <body style="margin: 0; padding: 0; background-color: #F5F5F5; font-family: Arial, sans-serif;">
 
-                <div style="padding: 40px 15px; background-color: #F5F5F5;">
+                <div style="padding: 2.5rem 0.9375rem; background-color: #F5F5F5;">
 
-                    <div style="max-width: 620px; margin: 0 auto; padding: 40px; background-color: #FFFFFF; border: 1px solid #252A5266; border-radius: 10px; box-sizing: border-box; color: #070A1C;">
+                    <div style="max-width: 38.75rem; margin: 0 auto; padding: 2.5rem; background-color: #FFFFFF; border: 0.0625rem solid #252A5266; border-radius: 0.625rem; box-sizing: border-box; color: #070A1C;">
 
-                        <h2 style="font-size: 28px; font-weight: 600; margin: 0 0 20px 0;">
+                        <h2 style="font-size: 1.75rem; font-weight: 600; margin: 0 0 1.25rem 0;">
                             Вас вітає команда World IT!
                         </h2>
 
-                        <p style="font-size: 16px; line-height: 1.5; margin: 0 0 24px 0;">
+                        <p style="font-size: 1rem; line-height: 1.5; margin: 0 0 1.5rem 0;">
                             Щоб завершити реєстрацію та переконатися, що саме ви є
                             власником цієї електронної адреси, будь ласка, підтвердіть свою пошту.
                         </p>
 
-                        <a href="{link}" style="display: block; width: 100%; padding: 12px 20px; box-sizing: border-box; background-color: #070A1C; color: #FFFFFF; text-align: center; text-decoration: none; border-radius: 6px; font-size: 15px; margin-bottom: 24px;">
+                        <a href="{link}" style="display: block; width: 100%; padding: 0.75rem 1.25rem; box-sizing: border-box; background-color: #070A1C; color: #FFFFFF; text-align: center; text-decoration: none; border-radius: 0.375rem; font-size: 0.9375rem; margin-bottom: 1.5rem;">
                             Підтвердити пошту
                         </a>
 
-                        <div style="text-align: center; margin-bottom: 24px;">
-                            <img src="cid:image1" alt="friends" width="300" style="display: block; max-width: 100%; margin: 0 auto;">
+                        <div style="text-align: center; margin-bottom: 1.5rem;">
+                            <img src="cid:image1" alt="friends" style="display: block; width: 18.75rem; max-width: 100%; margin: 0 auto;">
                         </div>
 
-                        <hr style="border: none; border-top: 1px solid #252A5266; margin: 20px 0;">
+                        <hr style="border: none; border-top: 0.0625rem solid #252A5266; margin: 1.25rem 0;">
 
-                        <p style="font-size: 15px; line-height: 1.5; margin: 0;">
+                        <p style="font-size: 0.9375rem; line-height: 1.5; margin: 0;">
                             Якщо у вас виникнуть питання — ми завжди раді допомогти!<br>
                             З найкращими побажаннями, команда World IT Academy
                         </p>
