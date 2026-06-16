@@ -9,6 +9,7 @@ const currentUserId = messages.dataset.currentUserId
 const visibleChat = document.querySelector(".chat-place")
 const visibleLeftPart = document.querySelector(".left-part")
 const btnBackChat = document.querySelector(".back-chat")
+const mobileMedia = window.matchMedia("(max-width: 480px)")
 export let selectedChatId = localStorage.getItem("selectedChatId")
 
 export const socket = io()
@@ -19,7 +20,26 @@ const avatarColors = ["#4DA6FF", "#F39C12", "#1ABC9C", "#9B59B6", "#FF3B30", "#3
 function avatarColor(userId) {
     return avatarColors[(userId - 1) % avatarColors.length]
 }
+
+function isMobileChatLayout() {
+    return mobileMedia.matches
+}
+
+function resetDesktopLayout() {
+    if (!isMobileChatLayout()) {
+        visibleChat.style.display = ""
+        visibleLeftPart.style.display = ""
+    }
+}
+
+mobileMedia.addEventListener("change", resetDesktopLayout)
+resetDesktopLayout()
+
 btnBackChat.addEventListener("click", () => {
+    if (!isMobileChatLayout()) {
+        return
+    }
+
     visibleChat.style.display = "none"
     visibleLeftPart.style.display = "flex"
 })
@@ -148,8 +168,10 @@ selectedChats.forEach((chat) => {
         selectedChats.forEach((item) => {
             item.style.backgroundColor = "transparent"
         })
-        visibleChat.style.display = "flex"
-        visibleLeftPart.style.display = "none"
+        if (isMobileChatLayout()) {
+            visibleChat.style.display = "flex"
+            visibleLeftPart.style.display = "none"
+        }
         chat.style.backgroundColor = "#F0F8FF"
 
         selectedChatId = chat.dataset.id

@@ -41,6 +41,9 @@
                         <a href="" class="links">Політикою конфіденційності.</a>
                     </div>
                 </div>
+                {% if message is not none %}
+                    <p>{{message}}</p>
+                {% endif %}
         
             </div>
             <img src="{{url_for('user.static', filename= 'images/img_friends.png')}}" alt="friends">

@@ -1,5 +1,5 @@
 
-<div class="visible" style="flex-direction: column;">
+<div class="visible" style="flex-direction: column; height:100%; overflow-y: auto;">
     {% for chat in my_chats %}
         <div class="example-chat" data-id="{{ chat.id }}">
             <div class ="avatar">{{chat.img_chat}}</div>

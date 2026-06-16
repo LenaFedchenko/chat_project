@@ -5,14 +5,38 @@ const nameChat = document.querySelector(".name-chat")
 const rightPart = document.querySelector(".right-part")
 const visibleChat = document.querySelector(".chat-place")
 const btnBack2 = document.querySelector(".back-chat2")
+const mobileMedia = window.matchMedia("(max-width: 480px)")
+
+function isMobileChatLayout() {
+    return mobileMedia.matches
+}
+
+function resetDesktopLayout() {
+    if (!isMobileChatLayout()) {
+        rightPart.style.display = ""
+        visibleChat.style.display = ""
+        btnBack2.style.display = ""
+    }
+}
+
+mobileMedia.addEventListener("change", resetDesktopLayout)
+resetDesktopLayout()
 
 nameChat.addEventListener('click', () =>{
+    if (!isMobileChatLayout()) {
+        return
+    }
+
     rightPart.style.display = 'flex'
     visibleChat.style.display = 'none'
     btnBack2.style.display = 'flex'
 })
 
 btnBack2.addEventListener('click', () => {
+    if (!isMobileChatLayout()) {
+        return
+    }
+
     visibleChat.style.display = 'flex'
     rightPart.style.display = 'none'
 })

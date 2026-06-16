@@ -7,7 +7,7 @@ from .send_email import send_email
 
 
 def render_register():
-
+    message = None
     if flask.request.method == "POST":
         email = flask.request.form["email"]
         password = flask.request.form["password"]
@@ -24,23 +24,36 @@ def render_register():
                 send_email(email= email, user_id=user.id)
                 # Вова, редиректить на страничку успееза, название ссылки посмотреть у Каролины
                 return flask.redirect('/success')
+        else:
+            message = "Введіть емейл та пароль"
 
-    return flask.render_template("register.html")
+    return flask.render_template("register.html", message= message)
 
 
 def render_login():
-    email = flask.request.form.get('email')
-    password = flask.request.form.get("password")
-    
-    if email and password:
-        user = User.query.filter_by(email = email).scalar()
-        is_hash_password = security.check_password_hash(user.password, password)
+    message = None
 
-        if is_hash_password == True:
-            flask_login.login_user(user)
-            return flask.redirect('/')
+    if flask.request.method == "POST":
+        email = flask.request.form.get("email")
+        password = flask.request.form.get("password")
 
-    return flask.render_template("login.html")
+        if email and password:
+            user = User.query.filter_by(email=email).first()
+
+            if user is None:
+                message = "Користувача з таким email не знайдено"
+            else:
+                is_hash_password = security.check_password_hash(user.password, password)
+
+                if is_hash_password:
+                    flask_login.login_user(user)
+                    return flask.redirect("/")
+                else:
+                    message = "Пароль не вірний"
+        else:
+            message = "Введіть емейл та пароль"
+
+    return flask.render_template("login.html", message=message)
 
 def check_email():
     user_id = flask.request.args.get('user_id')
