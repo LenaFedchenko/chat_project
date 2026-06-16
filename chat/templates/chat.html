@@ -7,13 +7,14 @@
 <link rel="stylesheet" href="{{url_for('chat.static', filename='css/right.css') }}">
 <link rel="stylesheet" href="{{url_for('chat.static', filename='css/create-chat.css') }}">
 <link rel="stylesheet" href="{{url_for('chat.static', filename='css/delete-chat.css') }}">
+<link rel="stylesheet" href="{{url_for('chat.static', filename='css/media.css') }}">
 {% endblock  %}
 
 {% block content %}
 <div class="all-page-chat">
     <div class="left-part">
         <div class="search-chat" style="border: 0.0625rem #E2E1EC solid;">
-            <input type="text" name="search" placeholder="Пошук чатів..." style="border: none; width:22vw" class="search">
+            <input type="text" name="search" placeholder="Пошук чатів..." class="search">
         </div>
         <!-- <hr style="width: 26.5vw;"> -->
         <div class="all-chats">
@@ -45,6 +46,8 @@
     {% include 'particles/modal-leaving.html' %}
     <div class="chat-place">
         <div class="settings-chat">
+            <button class="back-chat"><img src="{{url_for('chat.static', filename = 'images/back.png')}}" alt="bck"></button>
+            
             <p class="name-chat">Оберіть чат</p>
             <div>
                 <img src="{{url_for('chat.static', filename = 'images/search.png')}}" alt="" style="cursor: pointer;">
@@ -81,23 +84,26 @@
 
 
     <div class="right-part">
-        <div class="users">
-            <p style="font-size: 1.25rem; margin:0; font-weight:400">Користувачі</p>
-            <div class="status">
-                <div class="status-users">
-                    <img style="width: 0.75rem; height:0.75rem;" src="{{url_for('chat.static', filename = 'images/people.png')}}" alt="">
-                    <p style="font-size: 0.75rem" class="count-users">0 пользователей</p>
-                </div>
-                <div class="status-users">
-                    <img style="width: 0.75rem; height:0.75rem;" src="{{url_for('chat.static', filename = 'images/people.png')}}" alt="">
-                    <p style="font-size: 0.75rem" class="count-online"></p>
+        <div style="display: flex; align-items:center;">
+            <button class="back-chat2"><img src="{{url_for('chat.static', filename = 'images/back.png')}}" alt="bck"></button>
+            <div class="users">
+                <p style="font-size: 1.25rem; margin:0; font-weight:400">Користувачі</p>
+                <div class="status">
+                    <div class="status-users">
+                        <img style="width: 0.75rem; height:0.75rem;" src="{{url_for('chat.static', filename = 'images/people.png')}}" alt="">
+                        <p style="font-size: 0.75rem" class="count-users">0 пользователей</p>
+                    </div>
+                    <div class="status-users">
+                        <img style="width: 0.75rem; height:0.75rem;" src="{{url_for('chat.static', filename = 'images/people.png')}}" alt="">
+                        <p style="font-size: 0.75rem" class="count-online"></p>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="people-online">
         </div>
         <div class="account-settings">
-            Тут будуть настройки акаунта
+            {% include 'particles/settings-account.html' %}
         </div>
     </div>
 </div>

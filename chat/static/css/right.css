@@ -3,7 +3,7 @@
 .right-part *{
     box-sizing: border-box;
 }
-** {
+.right-part *{
     font-family: 'Inter', sans-serif;
 }
 .right-part{
@@ -114,10 +114,103 @@
     display: flex;
     width: 100%;
     height: 30vh;
-    align-items: center;
-    justify-content: center;
+    min-height: 18.75rem;
+    align-items: stretch;
+    justify-content: flex-start;
     border-top: 0.0625rem solid #E2E1EC;
-    padding: 1rem;
+    padding: 0.75rem 1rem 1rem;
     text-align: center;
     flex-shrink: 0;
+    flex-direction: column;
+    gap: 0.75rem;
+    overflow: hidden;
+}
+.btn-div{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    min-height: 1rem;
+}
+.close2{
+    width: 1rem;
+    height: 1rem;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+.ava-div{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.account-settings .avatar{
+    width: 3.5rem;
+    height: 3.5rem;
+    font-size: 0.875rem;
+}
+.short-info{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    flex-direction: column;
+    min-width: 0;
+}
+.name-last,
+.username,
+.light-text,
+.main-text{
+    margin: 0;
+}
+.name-last{
+    max-width: 100%;
+    color: #333333;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.25rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.username{
+    max-width: 100%;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.25rem;
+    color: #007AFF;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.account-info-list{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    min-width: 0;
+}
+.second-info{
+    width: 100%;
+    display: flex;
+    gap: 0.25rem;
+    flex-direction: column;
+    align-items: start;
+    justify-content: flex-start;
+    min-width: 0;
+}
+.light-text{
+    color: #999999;
+    font-size: 0.75rem;
+    font-weight: 400;
+    line-height: 1rem;
+}
+.main-text{
+    color: #333333;
+    max-width: 100%;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.25rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }

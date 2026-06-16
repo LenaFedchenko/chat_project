@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/modal.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/media.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -23,7 +24,7 @@
             </div>
             <img src="{{ url_for('chat.static', filename='images/notif.svg') }}" alt="">
             <img src="{{ url_for('chat.static', filename='images/settings.svg') }}" alt="" class="open-modal" style="cursor: pointer;">
-            <img src="{{ url_for('chat.static', filename='images/avatar.png') }}" alt="">
+            <div class="avatar">{{letters_ava}}</div>
         </div>
         <div class="modal-bg"></div>
         <div style="display: none;" class="modal">
@@ -31,11 +32,11 @@
                 <p>Налаштування</p>
                 <img src="{{ url_for('static', filename='images/close.png') }}" alt="" class="img-set">
             </div>
-            <hr style="width: 28.9vw; color: #007AFF26">
+            <hr style="width: 90%; color: #007AFF26">
             <div class="img-prof">
                 <p>Зображення профілю</p>
                 <div class="editing">
-                    <img src="{{ url_for('chat.static', filename='images/avatar.png') }}" alt="" class="ava">
+                    <div class="avatar">{{letters_ava}}</div>
                     <button type="button" class="btn-change">
                         <img src="{{ url_for('static', filename='images/repeat.png') }}" alt="">
                         Замінити
@@ -46,7 +47,7 @@
                     </button>
                 </div>
             </div>
-            <hr style="width: 28.9vw; color: #007AFF26">
+            <hr style="width: 90%; color: #007AFF26">
             <form action="/get-data" method="post" class="data-user">
                 <label class="label-inp">
                     Ім’я
@@ -71,12 +72,12 @@
                     Вік
                     <input type="date" name="birth_date" class="inp" value="{{user.age or ''}}">
                 </label>
-                <hr style="width: 28.9vw; color: #007AFF26">
-                <a href="/del-user/" class="btn-sel">
+                <hr style="width: 90%; color: #007AFF26">
+                <a href="/del-user/" class="btn-sel" style="width: 100%; justify-content:start">
                     <img src="{{ url_for('static', filename='images/trash.png') }}" alt="" style="width: 1rem; height: 1rem;">
                     Видалити аккаунт
                 </a>
-                <hr style="width: 28.9vw; color: #007AFF26">
+                <hr style="width: 90%; color: #007AFF26">
                 <div class="btns">
                     <button type="button" class="btn-1">Скасувати</button>
                     <button type="submit" class="btn-2">Зберегти</button>

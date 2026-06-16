@@ -10,7 +10,13 @@
     gap: 1.05vh;
     border-right: 0.0625rem #E2E1EC solid;
 }
-
+.back-chat, .back-chat2{
+    display: none;
+}
+.search{
+    border: none; 
+    width:22vw;
+}
 .search-chat{
     display: flex;
     align-items: center;

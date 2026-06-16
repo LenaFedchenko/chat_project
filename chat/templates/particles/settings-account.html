@@ -1,0 +1,23 @@
+<div class="btn-div">
+    <img src="{{url_for('static', filename = 'images/close.png')}}" alt="" class="close2">
+</div>
+<div class="ava-div">
+    <div class="avatar">
+        {{letters_ava}}
+    </div>
+</div>
+
+<div class="short-info">
+    <p class="name-last">{{first_name}} {{last_name}}</p>
+    <p class="username">@{{username}}</p>
+</div>
+<div class='account-info-list'>
+    <div class="second-info">
+        <p class="light-text">Дата народження</p>
+        <p class="main-text">{{age}}</p>
+    </div>
+    <div class="second-info">
+        <p class="light-text">Стать</p>
+        <p class="main-text">{{gender}}</p>
+    </div>
+</div>

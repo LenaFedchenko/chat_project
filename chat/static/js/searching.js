@@ -1,6 +1,21 @@
 const search = document.querySelector(".search")
 const searchResults = document.querySelector('.search-results')
 const visible = document.querySelector('.visible')
+const nameChat = document.querySelector(".name-chat")
+const rightPart = document.querySelector(".right-part")
+const visibleChat = document.querySelector(".chat-place")
+const btnBack2 = document.querySelector(".back-chat2")
+
+nameChat.addEventListener('click', () =>{
+    rightPart.style.display = 'flex'
+    visibleChat.style.display = 'none'
+    btnBack2.style.display = 'flex'
+})
+
+btnBack2.addEventListener('click', () => {
+    visibleChat.style.display = 'flex'
+    rightPart.style.display = 'none'
+})
 
 search.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {

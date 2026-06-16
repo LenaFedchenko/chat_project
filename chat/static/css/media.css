@@ -1,0 +1,77 @@
+@media (max-width: 480px) {
+    .chat-place{
+        display: none;
+        width: 100%
+    }
+    .right-part{
+        display: none;
+        width: 100%
+    }
+    .account-settings{
+        display: none;
+        width: 100%
+    }
+    .left-part{
+        width: 100%
+    }
+    .search-chat{
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+    }
+    .search{
+        width: 100%
+    }
+    .search-chat input{
+        width: 100%;
+        padding: 14px;
+    }
+    .name-hact{
+        display: flex;
+        width: 100%;
+
+    }
+    .all-exam{
+        width: 80%;
+    }
+    .settings-chat{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0px 12px;
+        min-height: 56px;
+        box-sizing: border-box;
+        gap: 12px;
+    }
+    .name-chat{
+        margin: 0;
+        flex: 1;
+        text-align: center;
+    }
+    .back-chat, .back-chat2{
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background-color: transparent;
+        border: none;
+        width: 24px;
+        height:24px ;
+        padding: 0;
+        flex-shrink: 0;
+        line-height: 0;
+        
+    }
+    .back-chat img, .back-chat2 img{
+        display: block;
+        width: 18px;
+        height: 18px;
+        object-fit: contain;
+    }
+    .settings-chat>div{
+        display: flex;  
+        align-items: center;
+        gap: 12px;
+        flex-shrink: 0;
+    }
+}

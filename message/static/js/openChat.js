@@ -6,7 +6,9 @@ const nameChat = document.querySelector('.name-chat')
 const noChat = document.querySelector('.no-chat')
 const currentUsername = messages.dataset.currentUsername
 const currentUserId = messages.dataset.currentUserId
-
+const visibleChat = document.querySelector(".chat-place")
+const visibleLeftPart = document.querySelector(".left-part")
+const btnBackChat = document.querySelector(".back-chat")
 export let selectedChatId = localStorage.getItem("selectedChatId")
 
 export const socket = io()
@@ -17,7 +19,10 @@ const avatarColors = ["#4DA6FF", "#F39C12", "#1ABC9C", "#9B59B6", "#FF3B30", "#3
 function avatarColor(userId) {
     return avatarColors[(userId - 1) % avatarColors.length]
 }
-
+btnBackChat.addEventListener("click", () => {
+    visibleChat.style.display = "none"
+    visibleLeftPart.style.display = "flex"
+})
 // сначала скрываем чат и показываем заглушку
 messages.style.display = "none"
 
@@ -143,7 +148,8 @@ selectedChats.forEach((chat) => {
         selectedChats.forEach((item) => {
             item.style.backgroundColor = "transparent"
         })
-
+        visibleChat.style.display = "flex"
+        visibleLeftPart.style.display = "none"
         chat.style.backgroundColor = "#F0F8FF"
 
         selectedChatId = chat.dataset.id
