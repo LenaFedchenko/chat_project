@@ -1,0 +1,111 @@
+<svg width="1200" height="675" viewBox="0 0 1200 675" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Chat Project interface preview</title>
+  <desc id="desc">A clean chat application preview with a sidebar, active conversation, messages, and online users.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="675" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F7FAFF"/>
+      <stop offset="1" stop-color="#EAF2FF"/>
+    </linearGradient>
+    <filter id="shadow" x="60" y="40" width="1080" height="600" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+      <feOffset dy="18"/>
+      <feGaussianBlur stdDeviation="28"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.05 0 0 0 0 0.11 0 0 0 0 0.24 0 0 0 0.16 0"/>
+      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1_1"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1_1" result="shape"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <circle cx="1040" cy="92" r="54" fill="#007AFF" opacity="0.1"/>
+  <circle cx="116" cy="590" r="72" fill="#007AFF" opacity="0.08"/>
+
+  <g filter="url(#shadow)">
+    <rect x="90" y="62" width="1020" height="545" rx="18" fill="#FFFFFF"/>
+    <rect x="90" y="62" width="1020" height="545" rx="18" stroke="#DDE7F6"/>
+
+    <rect x="90" y="62" width="250" height="545" rx="18" fill="#F8FBFF"/>
+    <path d="M340 80V589" stroke="#E4ECF7" stroke-width="2"/>
+    <rect x="112" y="92" width="42" height="42" rx="12" fill="#007AFF"/>
+    <circle cx="125.5" cy="112.5" r="6.5" fill="#FFFFFF"/>
+    <circle cx="141.5" cy="112.5" r="6.5" fill="#FFFFFF"/>
+    <path d="M119 127C127 134 139 134 147 127" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"/>
+    <text x="168" y="119" fill="#0B1020" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700">Chat</text>
+    <text x="112" y="168" fill="#6B7280" font-family="Inter, Arial, sans-serif" font-size="13">Search chats</text>
+    <rect x="112" y="181" width="196" height="42" rx="10" fill="#FFFFFF" stroke="#DDE7F6"/>
+    <circle cx="132" cy="202" r="7" stroke="#8CA0B8" stroke-width="2"/>
+    <path d="M137 207L144 214" stroke="#8CA0B8" stroke-width="2" stroke-linecap="round"/>
+    <text x="156" y="207" fill="#8CA0B8" font-family="Inter, Arial, sans-serif" font-size="14">Project updates</text>
+
+    <rect x="112" y="250" width="196" height="70" rx="12" fill="#EAF4FF" stroke="#B9DAFF"/>
+    <circle cx="142" cy="285" r="19" fill="#007AFF"/>
+    <text x="132" y="291" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="700">PU</text>
+    <text x="172" y="278" fill="#0B1020" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="700">Project Updates</text>
+    <text x="172" y="300" fill="#516072" font-family="Inter, Arial, sans-serif" font-size="12">New release is ready</text>
+
+    <rect x="112" y="336" width="196" height="70" rx="12" fill="#FFFFFF" stroke="#E7EEF8"/>
+    <circle cx="142" cy="371" r="19" fill="#F0F6FF"/>
+    <text x="132" y="377" fill="#007AFF" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="700">DS</text>
+    <text x="172" y="364" fill="#0B1020" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="700">Design Sync</text>
+    <text x="172" y="386" fill="#6B7280" font-family="Inter, Arial, sans-serif" font-size="12">Tomorrow at 10:00</text>
+
+    <rect x="112" y="422" width="196" height="70" rx="12" fill="#FFFFFF" stroke="#E7EEF8"/>
+    <circle cx="142" cy="457" r="19" fill="#F0F6FF"/>
+    <text x="132" y="463" fill="#007AFF" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="700">QA</text>
+    <text x="172" y="450" fill="#0B1020" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="700">QA Room</text>
+    <text x="172" y="472" fill="#6B7280" font-family="Inter, Arial, sans-serif" font-size="12">Bugs and checks</text>
+
+    <rect x="340" y="62" width="520" height="545" fill="#FFFFFF"/>
+    <rect x="365" y="90" width="470" height="60" rx="14" fill="#FFFFFF"/>
+    <circle cx="397" cy="120" r="21" fill="#007AFF"/>
+    <text x="386" y="127" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="700">PU</text>
+    <text x="430" y="116" fill="#0B1020" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700">Project Updates</text>
+    <circle cx="431" cy="134" r="4" fill="#24C77A"/>
+    <text x="442" y="138" fill="#6B7280" font-family="Inter, Arial, sans-serif" font-size="12">5 members online</text>
+    <path d="M365 164H835" stroke="#E4ECF7" stroke-width="2"/>
+
+    <rect x="386" y="203" width="258" height="54" rx="14" fill="#F3F6FA"/>
+    <text x="408" y="225" fill="#172033" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700">Mia</text>
+    <text x="408" y="244" fill="#4E5A6B" font-family="Inter, Arial, sans-serif" font-size="14">The new chat flow is ready.</text>
+
+    <rect x="543" y="284" width="270" height="56" rx="14" fill="#007AFF"/>
+    <text x="565" y="306" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700">You</text>
+    <text x="565" y="325" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="14">Great. I will review it now.</text>
+
+    <rect x="386" y="368" width="300" height="56" rx="14" fill="#F3F6FA"/>
+    <text x="408" y="390" fill="#172033" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700">Alex</text>
+    <text x="408" y="409" fill="#4E5A6B" font-family="Inter, Arial, sans-serif" font-size="14">Socket events are working too.</text>
+
+    <rect x="365" y="520" width="470" height="50" rx="14" fill="#F8FBFF" stroke="#DDE7F6"/>
+    <text x="390" y="551" fill="#8CA0B8" font-family="Inter, Arial, sans-serif" font-size="14">Type a message...</text>
+    <circle cx="801" cy="545" r="18" fill="#007AFF"/>
+    <path d="M793 545H807" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M802 539L808 545L802 551" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <path d="M860 80V589" stroke="#E4ECF7" stroke-width="2"/>
+    <text x="890" y="120" fill="#0B1020" font-family="Inter, Arial, sans-serif" font-size="19" font-weight="700">Members</text>
+    <text x="890" y="145" fill="#6B7280" font-family="Inter, Arial, sans-serif" font-size="13">Online now</text>
+
+    <circle cx="910" cy="195" r="20" fill="#EAF4FF"/>
+    <text x="900" y="201" fill="#007AFF" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="700">MI</text>
+    <text x="944" y="190" fill="#0B1020" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="700">Mia Chen</text>
+    <text x="944" y="211" fill="#24A366" font-family="Inter, Arial, sans-serif" font-size="12">online</text>
+
+    <circle cx="910" cy="262" r="20" fill="#EAF4FF"/>
+    <text x="900" y="268" fill="#007AFF" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="700">AL</text>
+    <text x="944" y="257" fill="#0B1020" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="700">Alex Lee</text>
+    <text x="944" y="278" fill="#24A366" font-family="Inter, Arial, sans-serif" font-size="12">online</text>
+
+    <circle cx="910" cy="329" r="20" fill="#EAF4FF"/>
+    <text x="900" y="335" fill="#007AFF" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="700">KA</text>
+    <text x="944" y="324" fill="#0B1020" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="700">Kate Ford</text>
+    <text x="944" y="345" fill="#8CA0B8" font-family="Inter, Arial, sans-serif" font-size="12">offline</text>
+
+    <rect x="890" y="405" width="174" height="112" rx="14" fill="#F8FBFF" stroke="#DDE7F6"/>
+    <text x="912" y="436" fill="#0B1020" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="700">Today</text>
+    <text x="912" y="462" fill="#516072" font-family="Inter, Arial, sans-serif" font-size="13">18 messages sent</text>
+    <rect x="912" y="481" width="118" height="8" rx="4" fill="#DDE7F6"/>
+    <rect x="912" y="481" width="82" height="8" rx="4" fill="#007AFF"/>
+  </g>
+</svg>
