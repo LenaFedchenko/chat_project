@@ -105,6 +105,7 @@
         <div class="account-settings">
             {% include 'particles/settings-account.html' %}
         </div>
+        <div class="account-settings-bg"></div>
     </div>
 </div>
 
@@ -114,4 +115,5 @@
 <script type="module" src="{{ url_for('message.static', filename='js/openChat.js') }}"></script>
 <script type="module" src="{{ url_for('message.static', filename='js/leavingChat.js') }}"></script>
 <script type="module" src="{{ url_for('message.static', filename='js/users.js') }}"></script>
+<script type="module" src="{{ url_for('chat.static', filename='js/modalAvatar.js') }}"></script>
 {% endblock  %}

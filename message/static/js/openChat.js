@@ -21,6 +21,21 @@ function avatarColor(userId) {
     return avatarColors[(userId - 1) % avatarColors.length]
 }
 
+function formatTime(value) {
+    const diffMinutes = Math.floor((Date.now() - new Date(value).getTime()) / 60000)
+    if (diffMinutes < 1) {
+        return "just now"
+    }
+    if (diffMinutes < 60) {
+        return `${diffMinutes}m ago`
+    }
+    const diffHours = Math.floor(diffMinutes / 60)
+    if (diffHours < 24) {
+        return `${diffHours}h ago`
+    }
+    return `${Math.floor(diffHours / 24)}d ago`
+}
+
 function isMobileChatLayout() {
     return mobileMedia.matches
 }
@@ -121,7 +136,6 @@ socket.on("load_messages", (data) => {
                 <div class="texts">
                     <div class="sender">
                         <p class="name-sender">${msg.username}</p>
-                        <p class="time">${msg.time}</p>
                     </div>
                     <p class="msg-sended">${msg.message}</p>
                 </div>
@@ -143,7 +157,6 @@ socket.on("message", (data) => {
                 <div class="texts">
                     <div class="sender">
                         <p class="name-sender">${data.username}</p>
-                        <p class="time">${data.time}</p>
                     </div>
 
                     <p class="msg-sended">${data.message_text}</p>
@@ -155,9 +168,13 @@ socket.on("message", (data) => {
 
     if (chatItem) {
         const lastMsg = chatItem.querySelector(".last-msg")
+        const lastMsgTime = chatItem.querySelector(".name-hact p:last-child")
 
         if (lastMsg) {
             lastMsg.textContent = data.message_text
+        }
+        if (lastMsgTime) {
+            lastMsgTime.textContent = formatTime(data.time)
         }
     }
 })

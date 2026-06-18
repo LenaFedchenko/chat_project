@@ -52,7 +52,7 @@ def join_room(data):
         message_list.append({
             "username": user_name,
             "user_id": msg.user_id,
-            "time": msg.time_of_msg.strftime("%H:%M"),
+            "time": msg.time_of_msg.isoformat(),
             "ava": ava,
             "message": msg.text_of_message
             
@@ -117,7 +117,7 @@ def send_message(data):
                 "username": username,
                 "user_id": flask_login.current_user.id,
                 "ava": username[:1].upper(),
-                "time": message.time_of_msg.strftime("%H:%M"),
+                "time": message.time_of_msg.isoformat(),
             },
             to= f"room-{chat_id}"
         )
@@ -206,4 +206,3 @@ def disconnect():
         "user_id" : current_user_id,
         "status": "offline"
     })
-

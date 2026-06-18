@@ -1,8 +1,26 @@
 import flask
 import flask_login
+from datetime import datetime
 from user.model import User
 from project.db import DATABASE
 from .model import Chat
+from message.model import Message
+
+
+def last_message_time(chat):
+    last_message = Message.query.filter_by(chat_id=chat.id).order_by(Message.time_of_msg.desc()).first()
+    if not last_message:
+        return ""
+    minutes = int((datetime.now() - last_message.time_of_msg).total_seconds() // 60)
+    if minutes < 1:
+        return "just now"
+    if minutes < 60:
+        return f"{minutes}m ago"
+    hours = minutes // 60
+    if hours < 24:
+        return f"{hours}h ago"
+    days = hours // 24
+    return f"{days}d ago"
 
 def render_chat():
     if flask_login.current_user.is_authenticated:
@@ -14,6 +32,10 @@ def render_chat():
         all_chats = Chat.query.filter(
             Chat.users.any(User.id == user.id)
         ).all()
+        for chat in all_chats:
+            chat.last_msg_time = last_message_time(chat)
+        if created_chat:
+            created_chat.last_msg_time = last_message_time(created_chat)
         user_filter= User.query.filter_by(
             id = user.id
         ).scalar()
@@ -136,6 +158,7 @@ def search():
                 "name_chat": chat.name_chat,
                 "img_chat": chat.img_chat,
                 "last_msg": chat.last_msg
+                , "last_msg_time": last_message_time(chat)
             })
         return {
             "status": "success",

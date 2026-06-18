@@ -41,11 +41,11 @@ btnBack2.addEventListener('click', () => {
     rightPart.style.display = 'none'
 })
 
-search.addEventListener("keydown", (event) => {
+search.addEventListener("keyup", (event) => {
     if (event.key === "Enter") {
-        searchingChat(search.value)
+        searchingChat(search.value);
     }
-})
+});
 
 async function searchingChat(name) {
     const response = await fetch(`/search?name=${name}`)
@@ -65,7 +65,7 @@ async function searchingChat(name) {
                     <div class="all-exam">
                         <div class="name-hact">
                             <p class="name">${chat.name_chat}</p>
-                            <p>15m ago</p>
+                            <p>${chat.last_msg_time || ""}</p>
                         </div>
                         <div>
                             <p>${chat.last_msg}</p> 
