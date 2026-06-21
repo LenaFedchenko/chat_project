@@ -32,7 +32,7 @@ socket.on('get_users', (data) => {
             if (user.last_name) {
                 peopleOnline.innerHTML += `
                     <div class="person" data-user-id="${user.id}">
-                        <div class="us" style="background-color: ${avatarColor(user.id)}">
+                        <div class="us" data-user-id="${user.id}" style="background-color: ${avatarColor(user.id)}">
                             ${user.first_name.slice(0, 1).toUpperCase()}
                             <span class="status-circle"></span>
                         </div>
@@ -44,7 +44,7 @@ socket.on('get_users', (data) => {
                 }else{
                     peopleOnline.innerHTML += `
                     <div class="person" data-user-id="${user.id}">
-                        <div class="us" style="background-color: ${avatarColor(user.id)}">
+                        <div class="us" data-user-id="${user.id}" style="background-color: ${avatarColor(user.id)}">
                             ${user.first_name.slice(0, 1).toUpperCase()}
                             <span class="status-circle"></span>
                         </div>
@@ -57,7 +57,7 @@ socket.on('get_users', (data) => {
             }else{
                 peopleOnline.innerHTML += `
                 <div class="person" data-user-id="${user.id}">
-                    <div class="us" style="background-color: ${avatarColor(user.id)}">
+                    <div class="us" data-user-id="${user.id}" style="background-color: ${avatarColor(user.id)}">
                         ${user.email.slice(0, 1).toUpperCase()}
                         <span class="status-circle"></span>
                     </div>

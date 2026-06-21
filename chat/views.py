@@ -1,4 +1,5 @@
 import flask
+from flask import jsonify, request
 import flask_login
 from datetime import datetime
 from user.model import User
@@ -39,26 +40,26 @@ def render_chat():
         user_filter= User.query.filter_by(
             id = user.id
         ).scalar()
-        if user_filter.first_name is not None and user_filter.last_name is not None:
-            letters_ava =  user_filter.first_name[0] + user_filter.last_name[0]
-            first_name = user_filter.first_name
-            last_name = user_filter.last_name
-        else: 
-            letters_ava = user_filter.email[:2]
-            first_name = "Заповніть ім'я"
-            last_name = "Заповніть прізвище"
-        if user_filter.username is not None:
-            username = user_filter.username
-        else:
-            username = "Заповніть нікнейм"
-        if user_filter.age is not None:
-            age = user_filter.age
-        else:
-            age = "заповніть дату народження"
-        if user_filter.gender is not None:
-            gender = user_filter.gender
-        else:
-            gender = "заповніть стать"
+        # if user_filter.first_name is not None and user_filter.last_name is not None:
+        #     letters_ava =  user_filter.first_name[0] + user_filter.last_name[0]
+        #     first_name = user_filter.first_name
+        #     last_name = user_filter.last_name
+        # else: 
+        #     letters_ava = user_filter.email[:2]
+        #     first_name = "Заповніть ім'я"
+        #     last_name = "Заповніть прізвище"
+        # if user_filter.username is not None:
+        #     username = user_filter.username
+        # else:
+        #     username = "Заповніть нікнейм"
+        # if user_filter.age is not None:
+        #     age = user_filter.age
+        # else:
+        #     age = "заповніть дату народження"
+        # if user_filter.gender is not None:
+        #     gender = user_filter.gender
+        # else:
+        #     gender = "заповніть стать"
         try: 
             my_chats = user.chats
         except: 
@@ -72,12 +73,6 @@ def render_chat():
             modal= False,
             my_chats = my_chats,
             user = user,
-            letters_ava= letters_ava,
-            first_name= first_name,
-            last_name= last_name,
-            username = username,
-            age = age,
-            gender = gender
         )
     else:
         return flask.redirect("/register")
@@ -177,3 +172,34 @@ def add_chat():
     return {
             "status": "success"
         }
+
+def get_data_users():
+    data = flask.request.get_json()
+    user_id = data.get("id_us")
+
+    filtered_user = User.query.filter_by(id=user_id).first()
+
+    if not filtered_user:
+        return jsonify({"error": "user not found"}), 404
+
+    if filtered_user.first_name and filtered_user.last_name:
+        letters_ava = filtered_user.first_name[0] + filtered_user.last_name[0]
+        first_name = filtered_user.first_name
+        last_name = filtered_user.last_name
+    else:
+        letters_ava = filtered_user.email[:2]
+        first_name = "Заповніть ім'я"
+        last_name = "Заповніть прізвище"
+
+    username = filtered_user.username or "Заповніть нікнейм"
+    age = filtered_user.age or "заповніть дату народження"
+    gender = filtered_user.gender or "заповніть стать"
+
+    return jsonify({
+        "letters_ava": letters_ava,
+        "first_name": first_name,
+        "last_name": last_name,
+        "username": username,
+        "age": age,
+        "gender": gender
+    })

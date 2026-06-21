@@ -40,6 +40,11 @@ message.add_url_rule(
     methods = ['GET', 'POST']
 )
 chat.add_url_rule(
+    rule = '/send-data-users/',
+    view_func = get_data_users,
+    methods = ['GET', 'POST']
+)
+chat.add_url_rule(
     rule = '/create-chat/',
     view_func = create_chat_page,
     methods = ['GET', 'POST']
