@@ -5,7 +5,7 @@
     display: flex;
     flex-direction: column;
     border-radius: 0.4rem;
-    width: 31vw;
+    width: 29vw;
     height: 74.8vh;
     gap: 1.6vh;
     padding: 1.6vh;
@@ -63,6 +63,13 @@ button{
     gap: 0.4rem;
 }
 
+.label-inp{
+    display: flex;
+    width: 28.9vw;
+    height: 6.2vh;
+    gap: 0.5rem;
+    flex-direction: column;
+}
 .editing{
     display: flex;
     width: 22.4vw;
@@ -77,13 +84,6 @@ button{
     height: 4rem;
 }
 
-.label-inp{
-    display: flex;
-    width: 28.9vw;
-    height: 6.2vh;
-    gap: 0.5rem;
-    flex-direction: column;
-}
 
 .inp{
     width: 28.9vw;

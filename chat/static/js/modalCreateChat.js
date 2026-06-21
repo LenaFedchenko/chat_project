@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
 })
 
 async function deleteChat(){
-    const response = await fetch("/del-chat", {
+    const response = await fetch("/del-chat/", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

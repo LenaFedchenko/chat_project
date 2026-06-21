@@ -41,14 +41,21 @@ btnBack2.addEventListener('click', () => {
     rightPart.style.display = 'none'
 })
 
-search.addEventListener("keyup", (event) => {
-    if (event.key === "Enter") {
-        searchingChat(search.value);
+function runSearch() {
+    searchingChat(search.value.trim())
+}
+
+search.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" || event.keyCode === 13) {
+        event.preventDefault()
+        runSearch()
     }
-});
+})
+
+search.addEventListener("search", runSearch)
 
 async function searchingChat(name) {
-    const response = await fetch(`/search?name=${name}`)
+    const response = await fetch(`/search/?name=${encodeURIComponent(name)}`)
     const data = await response.json()
     searchResults.innerHTML = ""
     if (data.status === "success") {
@@ -99,7 +106,7 @@ searchResults.addEventListener('click', async(event) => {
 })
 
 async function addingChat(chat_id){
-    const response = await fetch(`/add-chat?id=${chat_id}`, {
+    const response = await fetch(`/add-chat/?id=${chat_id}`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

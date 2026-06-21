@@ -4,6 +4,8 @@ from .model import User
 from project.db import DATABASE
 import flask_login
 from .send_email import send_email
+from chat.model import Chat, UserChat
+from message.model import Message
 
 
 def render_register():
@@ -67,10 +69,17 @@ def check_email():
     
 def del_account():
     user_id = flask_login.current_user.id
-    user = User.query.filter_by(id = user_id).scalar()
-    print(user)
+    user = User.query.get(user_id)
+
+    if not user:
+        return flask.redirect("/register")
+    # 1. удалить связи user-chat
+    UserChat.query.filter_by(user_id=user_id).delete()
+    Chat.query.filter_by(creator_id=user_id).delete()
     DATABASE.session.delete(user)
     DATABASE.session.commit()
+
+    flask_login.logout_user()
     return flask.redirect("/register")
 
 

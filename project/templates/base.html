@@ -32,7 +32,7 @@
                 <p>Налаштування</p>
                 <img src="{{ url_for('static', filename='images/close.png') }}" alt="" class="img-set">
             </div>
-            <hr style="width: 90%; color: #007AFF26">
+            <hr style="width: 100%; color: #007AFF26">
             <div class="img-prof">
                 <p>Зображення профілю</p>
                 <div class="editing">
@@ -47,7 +47,7 @@
                     </button>
                 </div>
             </div>
-            <hr style="width: 90%; color: #007AFF26">
+            <hr style="width: 100%; color: #007AFF26">
             <form action="/get-data" method="post" class="data-user">
                 <label class="label-inp">
                     Ім’я
@@ -72,12 +72,12 @@
                     Вік
                     <input type="date" name="birth_date" class="inp" value="{{user.age or ''}}">
                 </label>
-                <hr style="width: 90%; color: #007AFF26">
+                <hr style="width: 95%; color: #007AFF26">
                 <a href="/del-user/" class="btn-sel" style="width: 100%; justify-content:start">
                     <img src="{{ url_for('static', filename='images/trash.png') }}" alt="" style="width: 1rem; height: 1rem;">
                     Видалити аккаунт
                 </a>
-                <hr style="width: 90%; color: #007AFF26">
+                <hr style="width: 95%; color: #007AFF26">
                 <div class="btns">
                     <button type="button" class="btn-1">Скасувати</button>
                     <button type="submit" class="btn-2">Зберегти</button>
