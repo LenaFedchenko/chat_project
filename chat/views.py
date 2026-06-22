@@ -40,26 +40,10 @@ def render_chat():
         user_filter= User.query.filter_by(
             id = user.id
         ).scalar()
-        # if user_filter.first_name is not None and user_filter.last_name is not None:
-        #     letters_ava =  user_filter.first_name[0] + user_filter.last_name[0]
-        #     first_name = user_filter.first_name
-        #     last_name = user_filter.last_name
-        # else: 
-        #     letters_ava = user_filter.email[:2]
-        #     first_name = "Заповніть ім'я"
-        #     last_name = "Заповніть прізвище"
-        # if user_filter.username is not None:
-        #     username = user_filter.username
-        # else:
-        #     username = "Заповніть нікнейм"
-        # if user_filter.age is not None:
-        #     age = user_filter.age
-        # else:
-        #     age = "заповніть дату народження"
-        # if user_filter.gender is not None:
-        #     gender = user_filter.gender
-        # else:
-        #     gender = "заповніть стать"
+        if user_filter.first_name is not None and user_filter.last_name is not None:
+            letters_ava =  user_filter.first_name[0] + user_filter.last_name[0]
+        else: 
+            letters_ava = user_filter.email[:2]
         try: 
             my_chats = user.chats
         except: 
@@ -73,6 +57,7 @@ def render_chat():
             modal= False,
             my_chats = my_chats,
             user = user,
+            letters_ava= letters_ava
         )
     else:
         return flask.redirect("/register")
@@ -88,11 +73,16 @@ def get_data():
         birth_date = flask.request.form.get("birth_date")
         user = User.query.filter_by(id = flask_login.current_user.id).scalar()
         if user is not None:
-            user.first_name = first_name
-            user.last_name = last_name
-            user.username = username
-            user.gender = gender
-            user.age = birth_date
+            if first_name:
+                user.first_name = first_name
+            if last_name:
+                user.last_name = last_name
+            if username:
+                user.username = username
+            if gender: 
+                user.gender = gender
+            if birth_date:
+                user.age = birth_date
 
             DATABASE.session.commit()
             return flask.redirect("/")
@@ -188,12 +178,12 @@ def get_data_users():
         last_name = filtered_user.last_name
     else:
         letters_ava = filtered_user.email[:2]
-        first_name = "Заповніть ім'я"
-        last_name = "Заповніть прізвище"
+        first_name = "Немає ім'я"
+        last_name = "Немає прізвище"
 
-    username = filtered_user.username or "Заповніть нікнейм"
-    age = filtered_user.age or "заповніть дату народження"
-    gender = filtered_user.gender or "заповніть стать"
+    username = filtered_user.username or "Немає нікнейму"
+    age = filtered_user.age or "Немає дати народження"
+    gender = filtered_user.gender or "Немає статі"
 
     return jsonify({
         "letters_ava": letters_ava,

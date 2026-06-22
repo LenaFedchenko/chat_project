@@ -35,7 +35,16 @@ function formatTime(value) {
     }
     return `${Math.floor(diffHours / 24)}d ago`
 }
+function formatClockTime(value) {
+    if (!value) return ""
 
+    const date = new Date(value)
+
+    const hours = String(date.getHours()).padStart(2, "0")
+    const minutes = String(date.getMinutes()).padStart(2, "0")
+
+    return `${hours}:${minutes}`
+}
 function isMobileChatLayout() {
     return mobileMedia.matches
 }
@@ -136,7 +145,9 @@ socket.on("load_messages", (data) => {
                 <div class="texts">
                     <div class="sender">
                         <p class="name-sender">${msg.username}</p>
+                        <p class="msg-time">${formatClockTime(msg.time)}</p>
                     </div>
+
                     <p class="msg-sended">${msg.message}</p>
                 </div>
             </div>
@@ -157,6 +168,7 @@ socket.on("message", (data) => {
                 <div class="texts">
                     <div class="sender">
                         <p class="name-sender">${data.username}</p>
+                        <p class="msg-time">${formatClockTime(data.time)}</p>
                     </div>
 
                     <p class="msg-sended">${data.message_text}</p>

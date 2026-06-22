@@ -4,7 +4,7 @@ const accountSettingsBg = document.querySelector(".account-settings-bg")
 const accountSettingsParent = accountSettings.parentElement
 
 document.addEventListener("click", (event) => {
-    const us = event.target.closest(".us")
+    const us = event.target.closest(".person")
     if (!us) return
 
     const userId = us.dataset.userId
@@ -53,12 +53,13 @@ async function sendDataUser(id_user) {
 
 
 function renderUser(data) {
-    document.querySelector(".avatar").textContent = data.letters_ava || ""
+    console.log(data.letters_ava)
+    document.querySelector(".letter-avatar").textContent = data.letters_ava || ""
 
-    document.querySelector(".name-last").textContent = data.first_name || ""
-    document.querySelector(".name-last").textContent = data.last_name || ""
+    document.querySelector(".name-last").textContent = data.first_name + " " + data.last_name || ""
+    // document.querySelector(".name-last").textContent = data.last_name || ""
 
-    document.querySelector(".username").textContent = data.username || ""
+    document.querySelector(".username").textContent = "@" + data.username || ""
 
     document.querySelector(".age").textContent = data.age || ""
     document.querySelector(".gen").textContent = data.gender || ""

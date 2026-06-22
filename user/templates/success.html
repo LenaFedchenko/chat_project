@@ -2,23 +2,24 @@
 
 {% block links %}
 <link rel="stylesheet" href="{{url_for('user.static', filename= 'css/register.css')}}">
+<link rel="stylesheet" href="{{url_for('user.static', filename= 'css/success.css')}}">
 {% endblock  %}
 
 {% block content %}
     <div class="all-content">
         <div class="big-div">
-            <div class="mini-div">
+            <div class="mini-div2">
                 <img src="{{url_for('user.static', filename = 'images/logo.png')}}" alt="logo_img" class="logo">
                 <div class="div-create">
                     <p class="create">Успіх</p>
                 </div>
-                <div style="display: flex; align-items: center; justify-content: center">
+                <div class="success-text">
                     Ми надіслали вам електронний лист з магічним посиланням <br>
                         для підтвердження вашого облікового запису. <br>
                         Будь ласка, перевірте свою поштову скриньку та натисніть на <br>
                         посилання.
                 </div>
-                <button class="btn-send"><a href="https://mail.google.com/mail/u/0/#inbox" style="text-decoration: none; color:white">Відкрити електронну пошту</a></button>
+                <button class="btn-send"><a href="https://mail.google.com/mail/u/0/#inbox" class="btn-link">Відкрити електронну пошту</a></button>
         
             </div>
             <img src="{{url_for('user.static', filename= 'images/img_friends.png')}}" alt="friends">

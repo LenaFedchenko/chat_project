@@ -15,7 +15,10 @@ function updateOnlineUsers(){
     const onlineUsers = document.querySelectorAll('.status-circle[data-status="online"]')
     countOnline.textContent = `${onlineUsers.length} online`
 }
-
+const currentUserId = peopleOnline.dataset.currentUserId
+function isMe(userId) {
+    return String(userId) === String(currentUserId)
+}
     
 socket.on('get_users', (data) => {
     if (String(data.chat_id) !== String(selectedChatId)) {
@@ -31,41 +34,42 @@ socket.on('get_users', (data) => {
         if (user.first_name) {
             if (user.last_name) {
                 peopleOnline.innerHTML += `
-                    <div class="person" data-user-id="${user.id}">
+                    <div class="person ${isMe(user.id) ? "me" : ""}" data-user-id="${user.id}">
                         <div class="us" data-user-id="${user.id}" style="background-color: ${avatarColor(user.id)}">
                             ${user.first_name.slice(0, 1).toUpperCase()}
                             <span class="status-circle"></span>
                         </div>
                         <div>
-                            <p>${user.first_name} ${user.last_name}</p>
+                            <p>${user.first_name} ${user.last_name || ""}</p>
                         </div>
                     </div>
-                    `
+                `
+                    
                 }else{
                     peopleOnline.innerHTML += `
-                    <div class="person" data-user-id="${user.id}">
-                        <div class="us" data-user-id="${user.id}" style="background-color: ${avatarColor(user.id)}">
-                            ${user.first_name.slice(0, 1).toUpperCase()}
-                            <span class="status-circle"></span>
+                        <div class="person ${isMe(user.id) ? "me" : ""}" data-user-id="${user.id}">
+                            <div class="us" data-user-id="${user.id}" style="background-color: ${avatarColor(user.id)}">
+                                ${user.first_name.slice(0, 1).toUpperCase()}
+                                <span class="status-circle"></span>
+                            </div>
+                            <div>
+                                <p>${user.first_name}</p>
+                            </div>
                         </div>
-                        <div>
-                            <p>${user.first_name}</p>
-                        </div>
-                    </div>
-                    `
+                        `
                 }
             }else{
                 peopleOnline.innerHTML += `
-                <div class="person" data-user-id="${user.id}">
-                    <div class="us" data-user-id="${user.id}" style="background-color: ${avatarColor(user.id)}">
-                        ${user.email.slice(0, 1).toUpperCase()}
-                        <span class="status-circle"></span>
+                    <div class="person ${isMe(user.id) ? "me" : ""}" data-user-id="${user.id}">
+                        <div class="us" data-user-id="${user.id}" style="background-color: ${avatarColor(user.id)}">
+                            ${user.email.slice(0, 1).toUpperCase()}
+                            <span class="status-circle"></span>
+                        </div>
+                        <div>
+                            <p>${user.email}</p>
+                        </div>
                     </div>
-                    <div>
-                        <p>${user.email}</p>
-                    </div>
-                </div>
-                `
+                    `
             }
         })
 
