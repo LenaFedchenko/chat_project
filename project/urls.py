@@ -44,11 +44,11 @@ chat.add_url_rule(
     view_func = get_data_users,
     methods = ['GET', 'POST']
 )
-# chat.add_url_rule(
-#     rule = '/change-photo/',
-#     view_func = get_photo,
-#     methods = ['GET', 'POST']
-# )
+chat.add_url_rule(
+    rule = '/change-photo/',
+    view_func = get_photo,
+    methods = ['GET', 'POST']
+)
 chat.add_url_rule(
     rule = '/create-chat/',
     view_func = create_chat_page,

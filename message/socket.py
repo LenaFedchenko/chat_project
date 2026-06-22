@@ -41,40 +41,38 @@ def join_room(data):
         to= flask.request.sid
     )
 
-    message =  Message.query.filter_by(chat_id = chat_id).all()
+    message = Message.query.filter_by(chat_id = chat_id).all()
     message_list = []
-    for msg in message :
-        user_name = msg.user.username
-        if user_name is None:
-            user_name = msg.user.email
-            ava = user_name[:1].upper()
-        else:
-            ava = user_name[:1].upper()
+    for msg in message:
+        user_name = msg.user.username or msg.user.email
+        
         message_list.append({
             "username": user_name,
             "user_id": msg.user_id,
             "time": msg.time_of_msg.isoformat(),
-            "ava": ava,
+            "avatar": msg.user.avatar,
+            "ava": user_name[:1].upper(), 
             "message": msg.text_of_message
-            
         })
 
     user_status = []
     chat_filter_id = Chat.query.get(chat_id)
-
     users = chat_filter_id.users
     users_online = 0
-
     for user in users:
         if user.id in online_users.keys():
             status = "ON line"
             users_online += 1
         else:
             status = "OFF line"
+        if user.avatar:
+            avatar = user.avatar
+        elif user.username or user.email:
+            avatar = (user.username or user.email)[:1].upper()
         user_status.append({
             "id": user.id,
             "username": user.username or user.email,
-            "ava": (user.username or user.email)[:1].upper(),
+            "ava": avatar,
             "status": status
         })
     socketio.emit('status_user',
@@ -82,21 +80,20 @@ def join_room(data):
             'status': user_status,
             'chat_id': chat_id,
             'online_users': users_online,
-        },to= f"room-{chat_id}"
+        }, to=f"room-{chat_id}"
     )
-    
     
     socketio.emit(
         "load_messages", 
         {"messages": message_list},
-        to= flask.request.sid
+        to=flask.request.sid
     )
 
 
 @socketio.on("message")
 def send_message(data):
     chat_id = data.get("chat_id")
-    message_text =  data.get("message_text")
+    message_text = data.get("message_text")
     if chat_id and message_text:
         message = Message(
             text_of_message = message_text,
@@ -107,20 +104,22 @@ def send_message(data):
         chat_filter_id.last_msg = message.text_of_message
         DATABASE.session.add(message)
         DATABASE.session.commit()
-        username = flask_login.current_user.username
-        if username == None:
-            username = flask_login.current_user.email
+        
+        current_user = flask_login.current_user
+        username = current_user.username or current_user.email
+        
         socketio.emit(
             "message",
             {
                 "message_text": message.text_of_message,
                 "chat_id": chat_id,
                 "username": username,
-                "user_id": flask_login.current_user.id,
+                "user_id": current_user.id,
+                "avatar": current_user.avatar, 
                 "ava": username[:1].upper(),
                 "time": message.time_of_msg.isoformat(),
             },
-            to= f"room-{chat_id}"
+            to=f"room-{chat_id}"
         )
 
 
@@ -173,7 +172,8 @@ def get_users(data):
                 "email": user.email,
                 "first_name": user.first_name,
                 "last_name": user.last_name,
-                "username" : user.username
+                "username" : user.username,
+                "avatar": user.avatar 
                 })
         socketio.emit("get_users", {
             "status": "success",

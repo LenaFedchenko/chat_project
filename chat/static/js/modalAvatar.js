@@ -1,3 +1,4 @@
+
 const accountSettings = document.querySelector(".account-settings")
 const close2 = document.querySelector(".closing")
 const accountSettingsBg = document.querySelector(".account-settings-bg")
@@ -22,15 +23,14 @@ function openAccountSettings() {
     accountSettings.style.display = "flex"
 }
 
-close2.addEventListener("click", closeAccountSettings)
-
-accountSettingsBg.addEventListener("click", closeAccountSettings)
-
 function closeAccountSettings() {
     accountSettingsBg.style.display = "none"
     accountSettings.style.display = "none"
     accountSettingsParent.append(accountSettings, accountSettingsBg)
 }
+
+close2.addEventListener("click", closeAccountSettings)
+accountSettingsBg.addEventListener("click", closeAccountSettings)
 
 async function sendDataUser(id_user) {
     try {
@@ -43,7 +43,6 @@ async function sendDataUser(id_user) {
         })
 
         const data = await response.json()
-
         renderUser(data)
 
     } catch (error) {
@@ -51,16 +50,33 @@ async function sendDataUser(id_user) {
     }
 }
 
-
 function renderUser(data) {
-    console.log(data.letters_ava)
-    document.querySelector(".letter-avatar").textContent = data.letters_ava || ""
+    const avatarImg = accountSettings.querySelector(".avatar-img")
+    const avatarText = accountSettings.querySelector(".letter-avatar")
 
-    document.querySelector(".name-last").textContent = data.first_name + " " + data.last_name || ""
-    // document.querySelector(".name-last").textContent = data.last_name || ""
+    if (data.avatar) {
+        let path = data.avatar
 
-    document.querySelector(".username").textContent = "@" + data.username || ""
+        if (!path.startsWith("/")) {
+            // Добавляем /chat/static/ вместо /static/
+            path = "/chat/static/" + path
+        }
 
-    document.querySelector(".age").textContent = data.age || ""
-    document.querySelector(".gen").textContent = data.gender || ""
+        avatarImg.src = path
+        avatarImg.style.display = "block"
+        avatarText.style.display = "none"
+    } else {
+        avatarImg.style.display = "none"
+        avatarText.style.display = "block"
+        avatarText.textContent = data.letters_ava || ""
+    }
+
+    accountSettings.querySelector(".name-last").textContent =
+        ((data.first_name || "") + " " + (data.last_name || "")).trim()
+
+    accountSettings.querySelector(".username").textContent =
+        "@" + (data.username || "")
+
+    accountSettings.querySelector(".age").textContent = data.age || ""
+    accountSettings.querySelector(".gen").textContent = data.gender || ""
 }

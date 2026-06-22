@@ -17,3 +17,16 @@ cancel.addEventListener("click", () => {
     modalSettings.style.display = "none"
     modalBg.style.display = "none"
 })
+
+const photoInput = document.getElementById("photoInput");
+
+photoInput.addEventListener("change", async () => {
+    const formData = new FormData();
+    formData.append("photo", photoInput.files[0]);
+
+    await fetch("/change-photo/", {
+        method: "POST",
+        body: formData
+    });
+
+});

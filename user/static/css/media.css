@@ -1,0 +1,62 @@
+@media (max-width: 480px) {
+
+    .all-content{
+        padding: 1rem;
+        box-sizing: border-box;
+    }
+
+    .sml-div{
+        justify-content: center;
+        margin-bottom: 1rem;
+    }
+
+    .big-div{
+        width: 100%;
+        height: auto;
+        gap: 1.5rem;
+    }
+
+    .mini-div,
+    .div-create,
+    .veri_big_div,
+    .label-register{
+        width: 100%;
+    }
+
+    .label-register input,
+    .btn-send{
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .create{
+        font-size: 1.25rem;
+        text-align: center;
+    }
+
+    .logo{
+        width: 100%;
+        max-width: 218px;
+        height: auto;
+    }
+
+    .info{
+        text-align: center;
+    }
+
+    .div-links{
+        flex-wrap: wrap;
+    }
+
+    .big-div img:not(.logo){
+        width: 100%;
+        max-width: 350px;
+        height: auto;
+        align-self: center;
+    }
+    .btn-link{
+        width: 100%;
+
+    }
+
+}

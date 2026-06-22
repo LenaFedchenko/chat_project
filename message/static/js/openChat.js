@@ -18,9 +18,15 @@ let previousChatId = null
 const avatarColors = ["#4DA6FF", "#F39C12", "#1ABC9C", "#9B59B6", "#FF3B30", "#3498DB", "#34495E"]
 
 function avatarColor(userId) {
-    return avatarColors[(userId - 1) % avatarColors.length]
+    return avatarColors[(userId - 1) % avatarColors.length]}
+function getMessageAvatarHTML(msg) {
+    if (msg.avatar) {
+        const path = msg.avatar.startsWith("/") ? msg.avatar : "/chat/static/" + msg.avatar;
+        return `<img src="${path}" alt="" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">`;
+    } else {
+        return msg.ava;
+    }
 }
-
 function formatTime(value) {
     const diffMinutes = Math.floor((Date.now() - new Date(value).getTime()) / 60000)
     if (diffMinutes < 1) {
@@ -135,12 +141,15 @@ socket.on("join_room", (data) => {
 })
 
 socket.on("load_messages", (data) => {
-    // console.log("loded messages", data.messages)
     messages.innerHTML = ""
     data.messages.forEach((msg) => {
+        const avatarStyle = msg.avatar ? "" : `style="background-color: ${avatarColor(msg.user_id)}"`;
+
         messages.innerHTML += `
             <div class="msg ${myMessageClass(msg.username, msg.user_id)}">
-                <div class="avatar" style="background-color: ${avatarColor(msg.user_id)}">${msg.ava}</div>
+                <div class="avatar" ${avatarStyle}>
+                    ${getMessageAvatarHTML(msg)}
+                </div>
 
                 <div class="texts">
                     <div class="sender">
@@ -161,9 +170,13 @@ socket.on("message", (data) => {
         return
     }
 
+    const avatarStyle = data.avatar ? "" : `style="background-color: ${avatarColor(data.user_id)}"`;
+
     messages.innerHTML += `
             <div class="msg ${myMessageClass(data.username, data.user_id)}">
-                <div class="avatar" style="background-color: ${avatarColor(data.user_id)}">${data.ava}</div>
+                <div class="avatar" ${avatarStyle}>
+                    ${getMessageAvatarHTML(data)}
+                </div>
 
                 <div class="texts">
                     <div class="sender">
@@ -176,8 +189,8 @@ socket.on("message", (data) => {
             </div>
         `
     scrollToBottom()
+    
     const chatItem = document.querySelector(`.example-chat[data-id="${data.chat_id}"]`)
-
     if (chatItem) {
         const lastMsg = chatItem.querySelector(".last-msg")
         const lastMsgTime = chatItem.querySelector(".name-hact p:last-child")

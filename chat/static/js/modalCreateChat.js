@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const delChat = document.querySelector(".delete")
     const back2 = document.querySelector(".sec")
     const modal2 = document.querySelector(".second")
-    const circle = document.querySelector(".avatar");
 
     const randomColor = `rgb(
         ${Math.floor(Math.random() * 256)},

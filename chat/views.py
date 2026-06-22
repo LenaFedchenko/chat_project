@@ -1,11 +1,13 @@
-import flask
+import flask, os
 from flask import jsonify, request
+from werkzeug.utils import secure_filename
 import flask_login
 from datetime import datetime
 from user.model import User
 from project.db import DATABASE
 from .model import Chat
 from message.model import Message
+import time
 
 
 def last_message_time(chat):
@@ -50,6 +52,8 @@ def render_chat():
             my_chats = None
         if user_filter.avatar:
             avatar = user_filter.avatar
+        else:
+            avatar = None
         return flask.render_template(
             "chat.html",
             login=True,
@@ -90,6 +94,32 @@ def get_data():
             DATABASE.session.commit()
             return flask.redirect("/")
 
+def get_photo():
+    if flask.request.method == "POST":
+        photo = flask.request.files.get("photo")
+
+        if not photo or photo.filename == "":
+            return flask.redirect("/")
+
+        filename = f"{int(time.time())}_{secure_filename(photo.filename)}"
+        BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+        print(BASE_DIR)
+        upload_dir = os.path.join(BASE_DIR, "static", "uploads")
+        upload_dir = os.path.abspath(upload_dir)
+
+        os.makedirs(upload_dir, exist_ok=True)
+
+
+        path = os.path.join(upload_dir, filename)
+
+        photo.save(path)
+
+        user = User.query.get(flask_login.current_user.id)
+        user.avatar = f"uploads/{filename}"
+
+        DATABASE.session.commit()
+
+        return flask.redirect("/")
 
 def create_chat_page():
     if flask.request.method == "POST":
@@ -145,7 +175,7 @@ def search():
                 "id": chat.id,
                 "name_chat": chat.name_chat,
                 "img_chat": chat.img_chat,
-                "last_msg": chat.last_msg
+                "last_msg": chat.last_msg[:7] + "..."
                 , "last_msg_time": last_message_time(chat)
             })
         return {
@@ -177,18 +207,20 @@ def get_data_users():
 
     if filtered_user.first_name and filtered_user.last_name:
         letters_ava = filtered_user.first_name[0] + filtered_user.last_name[0]
-        first_name = filtered_user.first_name
-        last_name = filtered_user.last_name
     else:
         letters_ava = filtered_user.email[:2]
-        first_name = "Немає ім'я"
-        last_name = "Немає прізвище"
+
+    avatar = filtered_user.avatar
+
+    first_name = filtered_user.first_name or "Немає ім'я"
+    last_name = filtered_user.last_name or "Немає прізвище"
 
     username = filtered_user.username or "Немає нікнейму"
     age = filtered_user.age or "Немає дати народження"
     gender = filtered_user.gender or "Немає статі"
 
     return jsonify({
+        "avatar": avatar,
         "letters_ava": letters_ava,
         "first_name": first_name,
         "last_name": last_name,

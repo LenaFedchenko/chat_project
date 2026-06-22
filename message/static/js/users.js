@@ -30,52 +30,49 @@ socket.on('get_users', (data) => {
     peopleOnline.innerHTML = ""
 
     users.forEach((user) => {
-        countUsers ++
+        countUsers++
+        let displayName = ""
+        let letters = ""
+        
         if (user.first_name) {
-            if (user.last_name) {
-                peopleOnline.innerHTML += `
-                    <div class="person ${isMe(user.id) ? "me" : ""}" data-user-id="${user.id}">
-                        <div class="us" data-user-id="${user.id}" style="background-color: ${avatarColor(user.id)}">
-                            ${user.first_name.slice(0, 1).toUpperCase()}
-                            <span class="status-circle"></span>
-                        </div>
-                        <div>
-                            <p>${user.first_name} ${user.last_name || ""}</p>
-                        </div>
-                    </div>
-                `
-                    
-                }else{
-                    peopleOnline.innerHTML += `
-                        <div class="person ${isMe(user.id) ? "me" : ""}" data-user-id="${user.id}">
-                            <div class="us" data-user-id="${user.id}" style="background-color: ${avatarColor(user.id)}">
-                                ${user.first_name.slice(0, 1).toUpperCase()}
-                                <span class="status-circle"></span>
-                            </div>
-                            <div>
-                                <p>${user.first_name}</p>
-                            </div>
-                        </div>
-                        `
-                }
-            }else{
-                peopleOnline.innerHTML += `
-                    <div class="person ${isMe(user.id) ? "me" : ""}" data-user-id="${user.id}">
-                        <div class="us" data-user-id="${user.id}" style="background-color: ${avatarColor(user.id)}">
-                            ${user.email.slice(0, 1).toUpperCase()}
-                            <span class="status-circle"></span>
-                        </div>
-                        <div>
-                            <p>${user.email}</p>
-                        </div>
-                    </div>
-                    `
-            }
-        })
+            displayName = user.last_name ? `${user.first_name} ${user.last_name}` : user.first_name
+            letters = user.first_name.slice(0, 1).toUpperCase()
+        } else {
+            displayName = user.email
+            letters = user.email.slice(0, 1).toUpperCase()
+        }
+        let avatarContent = ""
+        let avatarStyle = ""
+
+        if (user.avatar) {
+            const path = user.avatar.startsWith("/") ? user.avatar : "/chat/static/" + user.avatar
+
+            avatarContent = `
+                <img src="${path}" alt="" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                <span class="status-circle"></span>
+            `
+        } else {
+            avatarStyle = `style="background-color: ${avatarColor(user.id)}"`
+            avatarContent = `
+                ${letters}
+                <span class="status-circle"></span>
+            `
+        }
+
+        peopleOnline.innerHTML += `
+            <div class="person ${isMe(user.id) ? "me" : ""}" data-user-id="${user.id}">
+                <div class="us" data-user-id="${user.id}" ${avatarStyle}>
+                    ${avatarContent}
+                </div>
+                <div>
+                    <p>${displayName}</p>
+                </div>
+            </div>
+        `
+    })
 
     countUsersP.textContent = `${countUsers} пользователя` 
 })
-
 socket.on('status_user', (data) => {
     if(String(data.chat_id) !== String(selectedChatId)){
         return
