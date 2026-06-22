@@ -14,7 +14,7 @@ class User(DATABASE.Model, flask_login.UserMixin):
     username = DATABASE.Column(DATABASE.String, nullable=True, unique=True)
     gender = DATABASE.Column(DATABASE.String, nullable=True)
     age = DATABASE.Column(DATABASE.Integer, nullable=True)
-
+    avatar = DATABASE.Column(DATABASE.String, nullable=True)
     chats = DATABASE.relationship(
         "Chat",
         secondary="user_chat",

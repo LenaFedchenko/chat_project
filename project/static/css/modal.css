@@ -18,6 +18,11 @@
     transform: translate(-50%, -50%);
     z-index: 1000;
 }
+.ava{
+    border-radius: 100%; 
+    width: 64px; 
+    height: 64px
+}
 .modal-bg{
     display: none;
     position: fixed;
@@ -133,7 +138,8 @@ button{
 
 .btn-change{
     width: 7.9vw;
-    height: 4vh;
+    height: 7vh;
+    padding: 7px;
     color: #007AFF;
     background-color: transparent;
     border: 0.0625rem #007AFF solid;

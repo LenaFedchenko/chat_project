@@ -24,7 +24,11 @@
             </div>
             <img src="{{ url_for('chat.static', filename='images/notif.svg') }}" alt="">
             <img src="{{ url_for('chat.static', filename='images/settings.svg') }}" alt="" class="open-modal" style="cursor: pointer;">
-            <div class="avatar opening">{{letters_ava}}</div>
+            {% if avatar %}
+                <img src="{{ url_for('chat.static', filename=avatar) }}" alt="" class="ava">
+            {% else %}
+                <div class="avatar opening">{{letters_ava}}</div>
+            {% endif %}
         </div>
         <div class="modal-bg"></div>
         <div style="display: none;" class="modal">
@@ -36,11 +40,26 @@
             <div class="img-prof">
                 <p>Зображення профілю</p>
                 <div class="editing">
-                    <div class="avatar">{{letters_ava}}</div>
-                    <button type="button" class="btn-change">
-                        <img src="{{ url_for('static', filename='images/repeat.png') }}" alt="">
-                        Замінити
-                    </button>
+                    <div class="avatar">
+                        {% if avatar %}
+                            <img src="{{ url_for('chat.static', filename=avatar) }}" alt="" class="ava">
+                        {% else %}
+                            {{ letters_ava }}
+                        {% endif %}
+                    </div>
+                    <form id="photoForm" enctype="multipart/form-data">
+                        <input
+                            type="file"
+                            id="photoInput"
+                            name="photo"
+                            accept="image/*"
+                            hidden
+                        >
+
+                        <label for="photoInput" class="btn-change">
+                            Замінити
+                        </label>
+                    </form>
                     <button type="button" class="btn-del">
                         <img src="{{ url_for('static', filename='images/trash.png') }}" alt="" style="width: 1rem; height: 1rem;">
                         Видалити

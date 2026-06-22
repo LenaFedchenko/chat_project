@@ -48,6 +48,8 @@ def render_chat():
             my_chats = user.chats
         except: 
             my_chats = None
+        if user_filter.avatar:
+            avatar = user_filter.avatar
         return flask.render_template(
             "chat.html",
             login=True,
@@ -57,7 +59,8 @@ def render_chat():
             modal= False,
             my_chats = my_chats,
             user = user,
-            letters_ava= letters_ava
+            letters_ava= letters_ava,
+            avatar = avatar
         )
     else:
         return flask.redirect("/register")

@@ -10,7 +10,8 @@ from .app import online_users
 @socketio.on("connect")
 def connection():
     print('Вы подключились')
-    
+    if not flask_login.current_user.is_authenticated:
+        return False
     id_user = flask_login.current_user.id
     sid = flask.request.sid
     if id_user not in online_users:
@@ -195,7 +196,8 @@ def leave_socket_room(data):
 
 @socketio.on("disconnect")
 def disconnect():
-
+    if not flask_login.current_user.is_authenticated:
+        return False
     current_user_id = flask_login.current_user.id
     online_users[current_user_id].discard(flask.request.sid)
 
