@@ -1,19 +1,36 @@
 @media (max-width: 480px) {
 
+    *{
+        box-sizing: border-box;
+    }
+
+    html, body{
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        overflow-x: hidden;
+        -webkit-text-size-adjust: 100%;
+    }
+
     .all-content{
         padding: 1rem;
+        width: 100%;
         box-sizing: border-box;
     }
 
     .sml-div{
+        display: flex;
         justify-content: center;
         margin-bottom: 1rem;
     }
 
     .big-div{
         width: 100%;
+        max-width: 100%;
         height: auto;
         gap: 1.5rem;
+        display: flex;
+        flex-direction: column;
     }
 
     .mini-div,
@@ -21,12 +38,15 @@
     .veri_big_div,
     .label-register{
         width: 100%;
+        max-width: 100%;
     }
 
     .label-register input,
     .btn-send{
         width: 100%;
+        max-width: 100%;
         box-sizing: border-box;
+        font-size: 16px;
     }
 
     .create{
@@ -38,6 +58,8 @@
         width: 100%;
         max-width: 218px;
         height: auto;
+        display: block;
+        margin: 0 auto;
     }
 
     .info{
@@ -45,7 +67,10 @@
     }
 
     .div-links{
+        display: flex;
         flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
     }
 
     .big-div img:not(.logo){
@@ -53,10 +78,11 @@
         max-width: 350px;
         height: auto;
         align-self: center;
+        display: block;
     }
+
     .btn-link{
         width: 100%;
-
+        max-width: 100%;
     }
-
 }

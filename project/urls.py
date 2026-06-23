@@ -45,6 +45,11 @@ chat.add_url_rule(
     methods = ['GET', 'POST']
 )
 chat.add_url_rule(
+    rule = '/delete-avatar/',
+    view_func = delete_avatar,
+    methods = ['GET', 'POST']
+)
+chat.add_url_rule(
     rule = '/change-photo/',
     view_func = get_photo,
     methods = ['GET', 'POST']

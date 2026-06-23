@@ -58,7 +58,6 @@ function renderUser(data) {
         let path = data.avatar
 
         if (!path.startsWith("/")) {
-            // Добавляем /chat/static/ вместо /static/
             path = "/chat/static/" + path
         }
 
@@ -80,3 +79,20 @@ function renderUser(data) {
     accountSettings.querySelector(".age").textContent = data.age || ""
     accountSettings.querySelector(".gen").textContent = data.gender || ""
 }
+const btnDeleteAvatar = document.querySelector(".btn-del")
+
+btnDeleteAvatar.addEventListener("click", async () => {
+    try {
+        const response = await fetch("/delete-avatar/", {
+            method: "POST"
+        })
+
+        const data = await response.json()
+
+        if (data.status === "success") {
+            location.reload()
+        }
+    } catch (error) {
+        console.error(error)
+    }
+})

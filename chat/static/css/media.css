@@ -8,9 +8,20 @@
         -webkit-text-size-adjust: 100%;
     }
 
+    html,
+    body{
+        overflow-x: hidden;
+    }
+
+    img{
+        max-width: 100%;
+        height: auto;
+    }
+
     .all-page-chat{
-        height: calc(100vh - 4rem);
-        height: calc(100svh - 4rem);
+        height: calc(100dvh - 4rem);
+        min-height: calc(100dvh - 4rem);
+        overflow: hidden;
         border-left: 0;
         border-right: 0;
     }
@@ -27,16 +38,21 @@
     .chat-place{
         display: none;
         width: 100%;
+        min-width: 0;
+        min-height: 0;
     }
 
     .right-part{
         display: none;
         width: 100%;
+        min-width: 0;
+        min-height: 0;
     }
 
     .left-part{
         width: 100%;
         min-width: 0;
+        min-height: 0;
     }
 
     .search-chat{
@@ -222,8 +238,10 @@
         max-width: 20rem;
 
         height: auto;
-        max-height: calc(100vh - 2rem);
-        max-height: calc(100svh - 2rem);
+        max-height: calc(100dvh - 2rem);
+
+        overflow-y: auto;
+        overscroll-behavior: contain;
 
         transform: translate(-50%, -50%);
         background: #FFFFFF;
@@ -240,6 +258,7 @@
         z-index: 1999;
         background: rgba(7, 10, 28, 0.35);
     }
+
     .del{
         width: 25px;
         height: 25px;

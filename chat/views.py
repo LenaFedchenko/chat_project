@@ -121,6 +121,21 @@ def get_photo():
 
         return flask.redirect("/")
 
+def delete_avatar():
+    user = User.query.get(flask_login.current_user.id)
+
+    if user.avatar:
+        BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+        file_path = os.path.join(BASE_DIR, "static", user.avatar)
+
+        if os.path.exists(file_path):
+            os.remove(file_path)
+
+        user.avatar = None
+        DATABASE.session.commit()
+
+    return {"status": "success"}
+
 def create_chat_page():
     if flask.request.method == "POST":
         chat_name = flask.request.form["chat_name"]
