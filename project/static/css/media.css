@@ -1,4 +1,7 @@
 @media(max-width: 480px){
+    html, body {
+        touch-action: pan-x pan-y;
+    }
     * {
         font-family: 'Inter', sans-serif;
         box-sizing: border-box;
