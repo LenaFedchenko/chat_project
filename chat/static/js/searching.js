@@ -5,7 +5,8 @@ const nameChat = document.querySelector(".name-chat")
 const rightPart = document.querySelector(".right-part")
 const visibleChat = document.querySelector(".chat-place")
 const btnBack2 = document.querySelector(".back-chat2")
-const mobileMedia = window.matchMedia("(max-width: 480px)")
+const mobileChatQuery = "(max-width: 768px), (max-height: 480px) and (hover: none) and (pointer: coarse)"
+const mobileMedia = window.matchMedia(mobileChatQuery)
 
 function isMobileChatLayout() {
     return mobileMedia.matches

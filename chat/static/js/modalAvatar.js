@@ -3,6 +3,7 @@ const accountSettings = document.querySelector(".account-settings")
 const close2 = document.querySelector(".closing")
 const accountSettingsBg = document.querySelector(".account-settings-bg")
 const accountSettingsParent = accountSettings.parentElement
+const mobileChatQuery = "(max-width: 768px), (max-height: 480px) and (hover: none) and (pointer: coarse)"
 
 document.addEventListener("click", (event) => {
     const us = event.target.closest(".person")
@@ -15,7 +16,7 @@ document.addEventListener("click", (event) => {
 })
 
 function openAccountSettings() {
-    if (window.matchMedia("(max-width: 480px)").matches) {
+    if (window.matchMedia(mobileChatQuery).matches) {
         document.body.append(accountSettingsBg, accountSettings)
         accountSettingsBg.style.display = "block"
     }

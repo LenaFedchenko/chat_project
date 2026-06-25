@@ -9,7 +9,8 @@ const currentUserId = messages.dataset.currentUserId
 const visibleChat = document.querySelector(".chat-place")
 const visibleLeftPart = document.querySelector(".left-part")
 const btnBackChat = document.querySelector(".back-chat")
-const mobileMedia = window.matchMedia("(max-width: 480px)")
+const mobileChatQuery = "(max-width: 768px), (max-height: 480px) and (hover: none) and (pointer: coarse)"
+const mobileMedia = window.matchMedia(mobileChatQuery)
 export let selectedChatId = localStorage.getItem("selectedChatId")
 
 export const socket = io()

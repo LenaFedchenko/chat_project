@@ -1,30 +1,41 @@
-@media(max-width:480px){
-    html, body {
-        touch-action: pan-x pan-y;
-    }
-
+@media (max-width: 768px), (max-height: 480px) and (hover: none) and (pointer: coarse) {
     * {
         box-sizing: border-box;
         min-width: 0;
     }
 
-    img, video, svg {
+    img,
+    video,
+    svg {
         max-width: 100%;
         height: auto;
     }
 
+    html,
     body {
+        width: 100%;
+        max-width: 100%;
+        min-height: 100%;
         margin: 0;
         padding: 0;
+        overflow: hidden;
+        overscroll-behavior: none;
+        -webkit-text-size-adjust: 100%;
     }
-    img{
+
+    img {
         max-width: 100%;
         height: auto;
     }
 
-    .all-page-chat{
-        height: calc(100dvh - 5rem);
-        min-height: calc(100dvh - 5rem);
+    .all-page-chat {
+        width: 100%;
+        max-width: 100%;
+        height: calc(100vh - 4rem);
+        height: calc(100svh - 4rem);
+        height: calc(100dvh - 4rem);
+        min-height: 0;
+        max-height: calc(100dvh - 4rem);
         overflow: hidden;
         border-left: 0;
         border-right: 0;
@@ -35,32 +46,45 @@
     .all-page-chat textarea,
     .modal input,
     .modal select,
-    .modal textarea{
+    .modal textarea {
         font-size: 16px;
     }
 
-    .chat-place{
+    .chat-place {
         display: none;
         width: 100%;
-        height: 95%;
+        max-width: 100%;
+        height: 100%;
         min-width: 0;
         min-height: 0;
+        max-height: 100%;
+        overflow: hidden;
     }
 
-    .right-part{
+    .right-part {
         display: none;
         width: 100%;
+        max-width: 100%;
+        height: 100%;
         min-width: 0;
         min-height: 0;
+        max-height: 100%;
+        overflow: hidden;
+        border-left: 0;
+        border-right: 0;
     }
 
-    .left-part{
+    .left-part {
         width: 100%;
+        max-width: 100%;
+        height: 100%;
         min-width: 0;
         min-height: 0;
+        overflow: hidden;
+        border-right: 0;
     }
 
-    .search-chat{
+    .search-chat {
         display: flex;
         width: 100%;
         height: auto;
@@ -71,12 +95,12 @@
         flex-shrink: 0;
     }
 
-    .search{
+    .search {
         width: 100%;
         min-width: 0;
     }
 
-    .search-chat input{
+    .search-chat input {
         width: 100%;
         height: 2.5rem;
         padding: 0 0.875rem;
@@ -85,43 +109,47 @@
         box-sizing: border-box;
     }
 
-    .all-chats{
+    .all-chats {
+        display: flex;
+        flex-direction: column;
         flex: 1;
         min-height: 0;
         overflow: hidden;
     }
 
     .visible,
-    .search-results{
+    .search-results {
         flex: 1;
+        height: auto !important;
         min-height: 0;
         overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
     }
 
-    .creat{
+    .creat {
         padding-bottom: 0.75rem;
     }
 
-    .create-chat-class{
+    .create-chat-class {
         width: calc(100% - 1.5rem);
         max-width: 21rem;
         height: 2.35rem;
     }
 
-    .example-chat{
+    .example-chat {
         min-height: 3.75rem;
         padding: 0.5rem 0.75rem;
         gap: 0.625rem;
     }
 
-    .example-chat .avatar{
+    .example-chat .avatar {
         width: 2.5rem;
         height: 2.5rem;
         font-size: 0.875rem;
         flex-shrink: 0;
     }
 
-    .name-hact{
+    .name-hact {
         display: flex;
         width: 100%;
         height: auto;
@@ -130,32 +158,32 @@
         min-width: 0;
     }
 
-    .all-exam{
+    .all-exam {
         width: auto;
         flex: 1;
         min-width: 0;
         gap: 0.25rem;
     }
 
-    .all-exam p{
+    .all-exam p {
         margin: 0;
     }
 
-    .name{
+    .name {
         font-size: 1rem;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
     }
 
-    .all-exam > div:last-child p{
+    .all-exam > div:last-child p {
         font-size: 0.875rem;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
     }
 
-    .settings-chat{
+    .settings-chat {
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -165,7 +193,7 @@
         gap: 12px;
     }
 
-    .name-chat{
+    .name-chat {
         margin: 0;
         flex: 1;
         min-width: 0;
@@ -176,35 +204,114 @@
         white-space: nowrap;
     }
 
-    .no-chat img{
-        width: 70vw ;
+    .chat,
+    .no-chat {
+        flex: 1;
+        width: 100%;
+        min-height: 0;
+        padding: 0.75rem;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .chat {
+        align-items: stretch;
+        gap: 1rem;
+        padding-left: 0.75rem;
+    }
+
+    .msg {
+        width: 100%;
+        gap: 0.625rem;
+        padding: 0 0.25rem;
+    }
+
+    .msg.my-message {
+        padding: 0.75rem 0.5rem;
+    }
+
+    .msg .avatar {
+        width: 2.25rem;
+        height: 2.25rem;
+        flex: 0 0 2.25rem;
+        font-size: 0.875rem;
+    }
+
+    .texts,
+    .sender {
+        min-width: 0;
+    }
+
+    .sender {
+        flex-wrap: wrap;
+        row-gap: 0.125rem;
+    }
+
+    .name-sender,
+    .msg-sended {
+        overflow-wrap: anywhere;
+    }
+
+    .no-chat img {
+        width: 70vw;
+        max-width: 19rem;
         height: auto;
     }
 
-    .place-for-message{
-        height: 4rem;
+    .place-for-message {
+        height: auto;
+        min-height: 4rem;
         padding: 0.75rem;
+        padding: 0.75rem 0.75rem calc(0.75rem + env(safe-area-inset-bottom));
+        flex-shrink: 0;
     }
 
-    .typing-field{
+    .place-for-message > img {
+        width: 1.5rem;
+        height: 1.5rem;
+        flex-shrink: 0;
+    }
+
+    .message-form {
+        min-width: 0;
+    }
+
+    .typing-field {
         height: 2.5rem;
         font-size: 16px;
     }
 
-    .sub{
+    .sub {
         width: 2.5rem;
         height: 2.5rem;
         flex-shrink: 0;
     }
 
+    .sub img {
+        width: 1.25rem;
+        height: 1.25rem;
+        object-fit: contain;
+    }
+
     .modal-chat,
-    .second{
-        width: min(90vw, 22rem);
+    .second {
+        width: min(calc(100vw - 2rem), 22rem);
+        max-height: calc(100dvh - 2rem);
+        padding: 1rem;
+        overflow-y: auto;
+    }
+
+    .back,
+    .sec,
+    .sec2 {
+        width: 100%;
+        height: 100%;
+        min-height: 100dvh;
         padding: 1rem;
     }
 
     .back-chat,
-    .back-chat2{
+    .back-chat2 {
         display: inline-flex;
         align-items: center;
         justify-content: center;
@@ -218,21 +325,60 @@
     }
 
     .back-chat img,
-    .back-chat2 img{
+    .back-chat2 img {
         display: block;
         width: 18px;
         height: 18px;
         object-fit: contain;
     }
 
-    .settings-chat > div{
+    .settings-chat > div {
         display: flex;
         align-items: center;
         gap: 12px;
         flex-shrink: 0;
     }
 
-    .account-settings{
+    .settings-chat > div img {
+        width: 1.25rem;
+        height: 1.25rem;
+        object-fit: contain;
+    }
+
+    .right-part > div:first-child {
+        width: 100%;
+        min-height: 3.5rem;
+        flex-shrink: 0;
+        border-bottom: 0.0625rem #E5E5E5 solid;
+    }
+
+    .users {
+        height: auto;
+        min-height: 3.5rem;
+        padding: 0.4rem 0.75rem 0.4rem 0.5rem;
+        border-bottom: 0;
+    }
+
+    .status {
+        gap: 0.5rem;
+    }
+
+    .status-users {
+        justify-content: flex-start;
+        gap: 0.25rem;
+    }
+
+    .people-online {
+        min-height: 0;
+    }
+
+    .person {
+        min-height: 3.5rem;
+        padding: 0.5rem 0.75rem;
+        gap: 0.625rem;
+    }
+
+    .account-settings {
         display: none;
         position: fixed;
         top: 50%;
@@ -249,7 +395,7 @@
         overscroll-behavior: contain;
 
         transform: translate(-50%, -50%);
-        background: #FFFFFF;
+        background: #ffffff;
         border: 0;
         border-radius: 0.5rem;
         box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.18);
@@ -257,14 +403,18 @@
         gap: 0.5rem;
     }
 
-    .account-settings-bg{
+    .account-settings * {
+        min-width: 0;
+    }
+
+    .account-settings-bg {
         position: fixed;
         inset: 0;
         z-index: 1999;
         background: rgba(7, 10, 28, 0.35);
     }
 
-    .del{
+    .del {
         width: 25px;
         height: 25px;
     }
