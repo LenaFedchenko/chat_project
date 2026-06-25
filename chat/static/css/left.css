@@ -7,8 +7,10 @@
     flex-direction: column;
     width: 26.5vw;
     height: 100%;
+    min-height: 0;
     gap: 1.05vh;
     border-right: 0.0625rem #E2E1EC solid;
+    overflow: hidden;
 }
 .back-chat, .back-chat2{
     display: none;
@@ -43,6 +45,7 @@
     width: 100%;
     height: auto;
     flex-direction: column;
+    flex-shrink: 0;
 }
 
 .header-your-chat{
@@ -64,10 +67,12 @@
 }
 .name-hact{
     display: flex;
-    width: 17.8vw;
-    height: 1.7vh;
+    width: 100%;
+    height: auto;
     gap: 0.3vw;
+    align-items: center;
     justify-content: space-between;
+    min-width: 0;
 }
 
 .name-chat p{
@@ -80,14 +85,21 @@
 }
 
 .name{
+    flex: 1;
+    min-width: 0;
     font-size: 1.125rem;
     color: #1A1A1A;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .all-exam{
     display: flex;
+    flex: 1;
     flex-direction: column;
     gap: 1vh;
     color: #666666;
+    min-width: 0;
 }
 .chats{
     display: flex;
@@ -97,14 +109,48 @@
 .all-chats{
     display: flex;
     width: 100%;
+    flex: 1;
+    min-height: 0;
     /* gap: 5vh; */
     flex-direction: column;
     align-items: left;
+    overflow: hidden;
 
 }
 
 .visible,
 .search-results {
     width: 100%;
+    min-height: 0;
     box-sizing: border-box;
+}
+
+.visible,
+.search-results {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.name-hact p:last-child {
+    flex-shrink: 0;
+}
+
+.name-hact p {
+    margin: 0;
+}
+
+.all-exam > div:last-child {
+    width: 100%;
+    min-width: 0;
+}
+
+.example-chat .avatar {
+    flex-shrink: 0;
+}
+
+.last-msg {
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }

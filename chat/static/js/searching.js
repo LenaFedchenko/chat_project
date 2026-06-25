@@ -76,7 +76,7 @@ async function searchingChat(name) {
                             <p>${chat.last_msg_time || ""}</p>
                         </div>
                         <div>
-                            <p>${chat.last_msg.slice(0,7) + "..."}</p> 
+                            <p class="last-msg">${chat.last_msg}</p>
                         </div>
                     </div>
                 </div>

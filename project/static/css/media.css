@@ -141,15 +141,27 @@
     }
 
     .modal .inp[type="date"] {
+        display: block;
         width: 100%;
+        inline-size: 100%;
         max-width: 100%;
+        max-inline-size: 100%;
         min-width: 0;
+        min-inline-size: 0;
         padding-right: 0.35rem;
         overflow: hidden;
+        appearance: none;
+        -webkit-appearance: none;
     }
 
     .modal .inp[type="date"]::-webkit-datetime-edit {
         padding: 0;
+        min-width: 0;
+    }
+
+    .modal .inp[type="date"]::-webkit-date-and-time-value {
+        min-width: 0;
+        text-align: left;
     }
 
     .modal .inp[type="date"]::-webkit-calendar-picker-indicator {

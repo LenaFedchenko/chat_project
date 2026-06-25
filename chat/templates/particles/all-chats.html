@@ -1,17 +1,19 @@
 
-<div class="visible" style="flex-direction: column; height:100%; overflow-y: auto;">
+<div class="visible">
     {% for chat in my_chats %}
-        <div class="example-chat" data-id="{{ chat.id }}">
-            <div class ="avatar">{{chat.img_chat}}</div>
-            <div class="all-exam">
-                <div class="name-hact">
-                    <p class="name">{{chat.name_chat}}</p>
-                    <p>{{ chat.last_msg_time }}</p>
-                </div>
-                <div>
-                    <p>{{chat.last_msg}}</p> 
+        {% if created_chat is none or chat.id != created_chat.id %}
+            <div class="example-chat" data-id="{{ chat.id }}">
+                <div class ="avatar">{{chat.img_chat}}</div>
+                <div class="all-exam">
+                    <div class="name-hact">
+                        <p class="name">{{chat.name_chat}}</p>
+                        <p>{{ chat.last_msg_time }}</p>
+                    </div>
+                    <div>
+                        <p class="last-msg">{{ chat.last_msg[:10] }}{% if chat.last_msg|length > 10 %}...{% endif %}</p>
+                    </div>
                 </div>
             </div>
-        </div>
+        {% endif %}
     {% endfor %}
 </div>

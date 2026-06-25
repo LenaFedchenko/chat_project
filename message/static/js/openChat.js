@@ -197,7 +197,7 @@ socket.on("message", (data) => {
         const lastMsgTime = chatItem.querySelector(".name-hact p:last-child")
 
         if (lastMsg) {
-            lastMsg.textContent = data.message_text
+            lastMsg.textContent = data.message_text.length > 7 ? data.message_text.slice(0, 7) + "..." : data.message_text
         }
         if (lastMsgTime) {
             lastMsgTime.textContent = formatTime(data.time)

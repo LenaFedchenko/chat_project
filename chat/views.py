@@ -9,7 +9,6 @@ from .model import Chat
 from message.model import Message
 import time
 
-
 def last_message_time(chat):
     last_message = Message.query.filter_by(chat_id=chat.id).order_by(Message.time_of_msg.desc()).first()
     if not last_message:
@@ -180,17 +179,20 @@ def del_chat():
 
 
 def search():
-    name_of_chat = flask.request.args.get("name")
-    print(name_of_chat)
+    name_of_chat = flask.request.args.get("name", "").strip().casefold()
     if name_of_chat:
-        finded_chats = Chat.query.filter(Chat.name_chat.ilike(f"%{name_of_chat}%")).all()
+        finded_chats = [
+            chat for chat in Chat.query.all()
+            if name_of_chat in chat.name_chat.casefold()
+        ]
         finded_chat_list = []
         for chat in finded_chats:
+            last_msg = chat.last_msg[:7] + ("..." if len(chat.last_msg) > 7 else "")
             finded_chat_list.append({
                 "id": chat.id,
                 "name_chat": chat.name_chat,
                 "img_chat": chat.img_chat,
-                "last_msg": chat.last_msg[:7] + "..."
+                "last_msg": last_msg
                 , "last_msg_time": last_message_time(chat)
             })
         return {

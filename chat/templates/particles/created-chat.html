@@ -11,7 +11,7 @@
                 <p>{{ created_chat.last_msg_time }}</p>
             </div>
             <div>
-                <p>{{ created_chat.last_msg }}</p> 
+                <p class="last-msg">{{ created_chat.last_msg[:10] }}{% if created_chat.last_msg|length > 10 %}...{% endif %}</p>
             </div>
         </div>
     </div>
