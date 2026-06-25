@@ -1,4 +1,4 @@
-import { socket, selectedChatId } from "./openChat.js";
+import { socket, getSelectedChatId } from "./openChat.js";
 
 
 const peopleOnline = document.querySelector(".people-online")
@@ -21,7 +21,7 @@ function isMe(userId) {
 }
     
 socket.on('get_users', (data) => {
-    if (String(data.chat_id) !== String(selectedChatId)) {
+    if (String(data.chat_id) !== String(getSelectedChatId())) {
         return
     }
 
@@ -74,7 +74,7 @@ socket.on('get_users', (data) => {
     countUsersP.textContent = `${countUsers} пользователя` 
 })
 socket.on('status_user', (data) => {
-    if(String(data.chat_id) !== String(selectedChatId)){
+    if(String(data.chat_id) !== String(getSelectedChatId())){
         return
     }
     console.log(data.online_users)
@@ -123,4 +123,3 @@ socket.on("user_status_changed", (data) => {
     
     
 })
-

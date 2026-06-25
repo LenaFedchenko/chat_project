@@ -1,4 +1,4 @@
-import { socket, selectedChatId } from "./openChat.js"
+import { socket, getSelectedChatId } from "./openChat.js"
 
 const leavingButton = document.querySelector('.leaving')
 const modalLeave = document.querySelector('.sec2')
@@ -9,7 +9,15 @@ const messages = document.querySelector('.chat')
 
 
 socket.on('leave_room', (data) => {
+    const selectedChatId = getSelectedChatId()
+
     if (String(data.chat_id) !== String(selectedChatId)) {
+        return
+    }
+
+    if (data.chat_deleted) {
+        localStorage.removeItem("selectedChatId")
+        location.reload()
         return
     }
 
@@ -34,13 +42,17 @@ btnСancel2.addEventListener('click', () => {
 
 
 btnDel.addEventListener('click', () => {
+    const selectedChatId = getSelectedChatId()
+    if (!selectedChatId) {
+        return
+    }
+
     socket.emit('leave_room', {
         chat_id: selectedChatId
     }, (response) => {
-        if (response.status === "success") {
+        if (response && response.status === "success") {
             localStorage.removeItem("selectedChatId")
             location.reload()
         }
     })
-    location.reload()
 })

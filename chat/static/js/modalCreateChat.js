@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const delChat = document.querySelector(".delete")
     const back2 = document.querySelector(".sec")
     const modal2 = document.querySelector(".second")
+    let chatIdToDelete = null
 
     const randomColor = `rgb(
         ${Math.floor(Math.random() * 256)},
@@ -41,6 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (delBtn) {
         delBtn.addEventListener("click", () => {
+            chatIdToDelete = delBtn.dataset.id
             modal2.style.display = "flex"
             back2.style.display = "flex"
             modal2.style.zIndex = "1000"
@@ -60,23 +62,30 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     if (delChat) {
         delChat.addEventListener("click", () => {
-            deleteChat()
+            deleteChat(chatIdToDelete)
         })
     }
 })
 
-async function deleteChat(){
+async function deleteChat(chatId){
+    if (!chatId) {
+        return
+    }
+
     const response = await fetch("/del-chat/", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            del: true
+            chat_id: chatId
         })
     })
     const data = await response.json()
     if (data.status === "success") {
+        if (String(localStorage.getItem("selectedChatId")) === String(data.deleted_chat_id)) {
+            localStorage.removeItem("selectedChatId")
+        }
         window.location.reload()
     }
 }

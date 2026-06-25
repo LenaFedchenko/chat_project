@@ -16,6 +16,10 @@ export let selectedChatId = localStorage.getItem("selectedChatId")
 export const socket = io()
 let previousChatId = null
 
+export function getSelectedChatId() {
+    return selectedChatId
+}
+
 const avatarColors = ["#4DA6FF", "#F39C12", "#1ABC9C", "#9B59B6", "#FF3B30", "#3498DB", "#34495E"]
 
 function avatarColor(userId) {
@@ -142,6 +146,10 @@ socket.on("join_room", (data) => {
 })
 
 socket.on("load_messages", (data) => {
+    if (String(data.chat_id) !== String(selectedChatId)) {
+        return
+    }
+
     messages.innerHTML = ""
     data.messages.forEach((msg) => {
         const avatarStyle = msg.avatar ? "" : `style="background-color: ${avatarColor(msg.user_id)}"`;
@@ -244,12 +252,15 @@ selectedChats.forEach((chat) => {
 })
 messageForm.addEventListener("submit", (event) => {
     event.preventDefault()
-    if (messageSend.value.trim() === "") {
+    const text = messageSend.value.trim()
+
+    if (!selectedChatId || text === "") {
         return
     }
+
     socket.emit("message", {
         chat_id: selectedChatId,
-        message_text: messageSend.value
+        message_text: text
     })
     messageSend.value = ""
 })

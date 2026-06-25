@@ -5,6 +5,7 @@ import flask_login
 from datetime import datetime
 from user.model import User
 from project.db import DATABASE
+from project.settings import socketio
 from .model import Chat
 from message.model import Message
 import time
@@ -27,7 +28,10 @@ def last_message_time(chat):
 def render_chat():
     if flask_login.current_user.is_authenticated:
         login = True
-        user = flask_login.current_user
+        user = DATABASE.session.get(User, flask_login.current_user.id)
+        if user is None:
+            flask_login.logout_user()
+            return flask.redirect("/register")
         created_chat = Chat.query.filter_by(
             creator_id=user.id
         ).first()
@@ -136,10 +140,15 @@ def delete_avatar():
     return {"status": "success"}
 
 def create_chat_page():
-    if flask.request.method == "POST":
-        chat_name = flask.request.form["chat_name"]
+    if not flask_login.current_user.is_authenticated:
+        return flask.redirect("/register")
 
-        user = flask_login.current_user
+    if flask.request.method == "POST":
+        chat_name = flask.request.form.get("chat_name", "").strip()
+
+        user = DATABASE.session.get(User, flask_login.current_user.id)
+        if user is None:
+            return jsonify({"status": "error", "message": "Unauthorized"}), 401
         is_create = Chat.query.filter_by(
                 creator_id=user.id
             ).first()
@@ -162,56 +171,102 @@ def create_chat_page():
 
 
 def del_chat():
+    if not flask_login.current_user.is_authenticated:
+        return jsonify({"status": "error", "message": "Unauthorized"}), 401
+
     if flask.request.method == "POST":
-        data = flask.request.get_json()
-        search = data.get('del')
-        if search:
-            user = flask_login.current_user
-            chat_delete = Chat.query.filter_by(creator_id = user.id).first()
-            chat_delete.users.clear()
-            DATABASE.session.delete(chat_delete)
-            DATABASE.session.commit()
-            
-        return {
+        data = flask.request.get_json(silent=True) or {}
+        chat_id = data.get("chat_id")
+        user = DATABASE.session.get(User, flask_login.current_user.id)
+        if user is None:
+            return jsonify({"status": "error", "message": "Unauthorized"}), 401
+
+        if chat_id is not None:
+            try:
+                chat_id = int(chat_id)
+            except (TypeError, ValueError):
+                return jsonify({"status": "error", "message": "Invalid chat id"}), 400
+
+            chat_delete = DATABASE.session.get(Chat, chat_id)
+        else:
+            chat_delete = Chat.query.filter_by(creator_id=user.id).first()
+
+        if chat_delete is None:
+            return jsonify({"status": "error", "message": "Chat not found"}), 404
+
+        if chat_delete.creator_id != user.id:
+            return jsonify({"status": "error", "message": "Only creator can delete chat"}), 403
+
+        deleted_chat_id = chat_delete.id
+        socketio.emit("leave_room", {
             "status": "success",
-            "search": search
-        }
+            "chat_id": deleted_chat_id,
+            "chat_deleted": True,
+            "user_leaved": user.id,
+            "username": user.username or user.email
+        }, to=f"room-{deleted_chat_id}")
+
+        chat_delete.users.clear()
+        DATABASE.session.delete(chat_delete)
+        DATABASE.session.commit()
+
+        return jsonify({
+            "status": "success",
+            "deleted_chat_id": deleted_chat_id
+        })
 
 
 def search():
     name_of_chat = flask.request.args.get("name", "").strip().casefold()
-    if name_of_chat:
-        finded_chats = [
-            chat for chat in Chat.query.all()
-            if name_of_chat in chat.name_chat.casefold()
-        ]
-        finded_chat_list = []
-        for chat in finded_chats:
-            last_msg = chat.last_msg[:7] + ("..." if len(chat.last_msg) > 7 else "")
-            finded_chat_list.append({
-                "id": chat.id,
-                "name_chat": chat.name_chat,
-                "img_chat": chat.img_chat,
-                "last_msg": last_msg
-                , "last_msg_time": last_message_time(chat)
-            })
+    if not name_of_chat:
         return {
             "status": "success",
-            "chats": finded_chat_list
+            "chats": []
         }
+
+    finded_chats = [
+        chat for chat in Chat.query.all()
+        if name_of_chat in chat.name_chat.casefold()
+    ]
+    finded_chat_list = []
+    for chat in finded_chats:
+        last_msg = chat.last_msg[:7] + ("..." if len(chat.last_msg) > 7 else "")
+        finded_chat_list.append({
+            "id": chat.id,
+            "name_chat": chat.name_chat,
+            "img_chat": chat.img_chat,
+            "last_msg": last_msg,
+            "last_msg_time": last_message_time(chat)
+        })
+    return {
+        "status": "success",
+        "chats": finded_chat_list
+    }
     
 def add_chat():
-    data = flask.request.get_json()
+    if not flask_login.current_user.is_authenticated:
+        return jsonify({"status": "error", "message": "Unauthorized"}), 401
+
+    data = flask.request.get_json(silent=True) or {}
     id = data.get('id')
-    user = flask_login.current_user
-    chat = Chat.query.get(int(id))
+    user = DATABASE.session.get(User, flask_login.current_user.id)
+    if user is None:
+        return jsonify({"status": "error", "message": "Unauthorized"}), 401
+    try:
+        chat_id = int(id)
+    except (TypeError, ValueError):
+        return jsonify({"status": "error", "message": "Invalid chat id"}), 400
+
+    chat = DATABASE.session.get(Chat, chat_id)
+    if chat is None:
+        return jsonify({"status": "error", "message": "Chat not found"}), 404
 
     if user not in chat.users:
         chat.users.append(user)
         DATABASE.session.commit()
     return {
-            "status": "success"
-        }
+        "status": "success"
+    }
 
 def get_data_users():
     data = flask.request.get_json()
